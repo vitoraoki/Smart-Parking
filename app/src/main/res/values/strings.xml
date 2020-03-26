@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Smart Park</string>
+    <string-array name="weight_values">
+        <item>Gramas</item>
+        <item>Kilo</item>
+        <item>Arrobas</item>
+        <item>Toneladas</item>
+    </string-array>
+</resources>
