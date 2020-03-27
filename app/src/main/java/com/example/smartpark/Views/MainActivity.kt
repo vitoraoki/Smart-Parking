@@ -1,13 +1,18 @@
 package com.example.smartpark.Views
 
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
-import androidx.appcompat.app.AppCompatActivity
+import android.app.*
+import android.content.Context
+import android.content.Intent
+import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.TimePicker
+import androidx.appcompat.app.AppCompatActivity
 import com.example.smartpark.Data.Institutes
 import com.example.smartpark.R
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,10 +27,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog
     private val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
     private val simpleHourFormat = SimpleDateFormat("HH:mm")
 
+    lateinit var alarmManager : AlarmManager
+    lateinit var notificationManager : NotificationManager
+    lateinit var notificationChannel : NotificationChannel
+    lateinit var builder : Notification.Builder
+    private val channelId = "i.apps.notifications"
+    private val description = "Test notification"
+
+    companion object {
+        val institute = "Título da notificação"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        createNotificationChannel()
         loadSpinnerInstitutes()
         setListeners()
     }
@@ -53,6 +70,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog
             instituteSelected.text = spinnerDynamic.selectedItem.toString()
             dateSelected.text = date
             timeSelected.text = time
+
+            // Set a notification alarm to the date and hour given
+            setNotification()
         }
         // Deal with the click of the button "Selecione uma data"
         else if (id == R.id.datePicker) {
@@ -101,5 +121,81 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog
         calendar.set(year, month, day, hourOfDay, minute)
         time = simpleHourFormat.format(calendar.time)
         timePicker.text = time
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            // Create the channel for the notification
+            notificationChannel = NotificationChannel(
+                channelId,description,NotificationManager.IMPORTANCE_HIGH)
+            notificationChannel.enableLights(true)
+            notificationChannel.lightColor = Color.GREEN
+            notificationChannel.enableVibration(false)
+
+            notificationManager = getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(notificationChannel)
+        }
+    }
+
+    private fun sendNotification() {
+
+        notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        val intent = Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            notificationManager.createNotificationChannel(notificationChannel)
+            builder = Notification.Builder(this,channelId)
+                .setContentTitle(spinnerDynamic.selectedItem.toString())
+                .setContentText(date + " - " + time)
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setLargeIcon(
+                    BitmapFactory.decodeResource(this.resources,
+                        R.drawable.ic_launcher_background))
+                .setContentIntent(pendingIntent)
+        } else {
+
+            builder = Notification.Builder(this)
+                .setContentTitle(spinnerDynamic.selectedItem.toString())
+                .setContentText(date + " - " + time)
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setLargeIcon(
+                    BitmapFactory.decodeResource(this.resources,
+                        R.drawable.ic_launcher_background))
+                .setContentIntent(pendingIntent)
+        }
+
+        notificationManager.notify(1234,builder.build())
+    }
+
+    private fun setNotification() {
+        val intent = Intent(this, NotificationReceiver::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        Log.d("Spinner", spinnerDynamic.selectedItem.toString())
+        Log.d("dateAndTime", date + " - " + time)
+        intent.putExtra("institute", spinnerDynamic.selectedItem.toString())
+        intent.putExtra("dateAndTime", date + " - " + time)
+        var idNotification = (System.currentTimeMillis() and 0xfffffff).toInt()
+        intent.putExtra("id", idNotification)
+        val pendingIntent: PendingIntent = PendingIntent.getBroadcast(this, idNotification, intent, 0)
+
+        alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+
+        var timeAtButtonClick = System.currentTimeMillis()
+        var fiveSecondsMillis = 1000 * 5
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP,
+                timeAtButtonClick + fiveSecondsMillis,
+                pendingIntent
+            )
+        }
     }
 }
