@@ -12,11 +12,17 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.TimePicker
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.smartpark.Data.Institutes
 import com.example.smartpark.R
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog.OnDateSetListener,
@@ -62,6 +68,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog
     }
 
     // Deal with all the button click events
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onClick(view: View) {
         val id = view.id
 
@@ -174,28 +181,34 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog
         notificationManager.notify(1234,builder.build())
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setNotification() {
         val intent = Intent(this, NotificationReceiver::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        Log.d("Spinner", spinnerDynamic.selectedItem.toString())
-        Log.d("dateAndTime", date + " - " + time)
+
+        val idNotification = (System.currentTimeMillis() and 0xfffffff).toInt()
+        intent.putExtra("id", idNotification)
         intent.putExtra("institute", spinnerDynamic.selectedItem.toString())
         intent.putExtra("dateAndTime", date + " - " + time)
-        var idNotification = (System.currentTimeMillis() and 0xfffffff).toInt()
-        intent.putExtra("id", idNotification)
         val pendingIntent: PendingIntent = PendingIntent.getBroadcast(this, idNotification, intent, 0)
 
         alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
 
         var timeAtButtonClick = System.currentTimeMillis()
-        var fiveSecondsMillis = 1000 * 5
+        val dateTime = LocalDateTime.parse(date + " " + time,
+            DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+            .atZone(ZoneId.of("America/Sao_Paulo"))
+            .toInstant()
+            .toEpochMilli()
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP,
-                timeAtButtonClick + fiveSecondsMillis,
-                pendingIntent
-            )
+        if((dateTime - timeAtButtonClick) >= 0) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, dateTime, pendingIntent)
+            }
+            Toast.makeText(this, "Alarme criado com sucesso", Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(this, "Escolha uma data e hora posterior a atual", Toast.LENGTH_LONG).show()
         }
     }
 }
