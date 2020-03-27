@@ -1,4 +1,4 @@
-package com.example.smartpark
+package com.example.smartpark.Data
 
 class Institutes private constructor(){
     companion object {
