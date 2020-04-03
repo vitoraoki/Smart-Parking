@@ -36,13 +36,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog
     lateinit var alarmManager : AlarmManager
     lateinit var notificationManager : NotificationManager
     lateinit var notificationChannel : NotificationChannel
-    lateinit var builder : Notification.Builder
     private val channelId = "i.apps.notifications"
     private val description = "Test notification"
-
-    companion object {
-        val institute = "Título da notificação"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +59,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog
     private fun loadSpinnerInstitutes() {
         spinnerDynamic.adapter = ArrayAdapter(this,
             android.R.layout.simple_spinner_dropdown_item,
-            Institutes.getInstitutesList())
+            Institutes.getInstituteNamesList())
     }
 
     // Deal with all the button click events
@@ -138,47 +133,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog
                 channelId,description,NotificationManager.IMPORTANCE_HIGH)
             notificationChannel.enableLights(true)
             notificationChannel.lightColor = Color.GREEN
-            notificationChannel.enableVibration(false)
+            notificationChannel.enableVibration(true)
 
             notificationManager = getSystemService(NotificationManager::class.java)
             notificationManager.createNotificationChannel(notificationChannel)
         }
-    }
-
-    private fun sendNotification() {
-
-        notificationManager =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        val intent = Intent(this, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
-            notificationManager.createNotificationChannel(notificationChannel)
-            builder = Notification.Builder(this,channelId)
-                .setContentTitle(spinnerDynamic.selectedItem.toString())
-                .setContentText(date + " - " + time)
-                .setSmallIcon(R.drawable.ic_launcher_background)
-                .setLargeIcon(
-                    BitmapFactory.decodeResource(this.resources,
-                        R.drawable.ic_launcher_background))
-                .setContentIntent(pendingIntent)
-        } else {
-
-            builder = Notification.Builder(this)
-                .setContentTitle(spinnerDynamic.selectedItem.toString())
-                .setContentText(date + " - " + time)
-                .setSmallIcon(R.drawable.ic_launcher_background)
-                .setLargeIcon(
-                    BitmapFactory.decodeResource(this.resources,
-                        R.drawable.ic_launcher_background))
-                .setContentIntent(pendingIntent)
-        }
-
-        notificationManager.notify(1234,builder.build())
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -191,6 +150,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog
         intent.putExtra("id", idNotification)
         intent.putExtra("institute", spinnerDynamic.selectedItem.toString())
         intent.putExtra("dateAndTime", date + " - " + time)
+        intent.putExtra("spinnerIndex", spinnerDynamic.selectedItemPosition.toString())
         val pendingIntent: PendingIntent = PendingIntent.getBroadcast(this, idNotification, intent, 0)
 
         alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
@@ -212,3 +172,39 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog
         }
     }
 }
+
+//    private fun sendNotification() {
+//
+//        notificationManager =
+//            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+//
+//        val intent = Intent(this, MainActivity::class.java).apply {
+//            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//        }
+//        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//
+//            notificationManager.createNotificationChannel(notificationChannel)
+//            builder = Notification.Builder(this,channelId)
+//                .setContentTitle(spinnerDynamic.selectedItem.toString())
+//                .setContentText(date + " - " + time)
+//                .setSmallIcon(R.drawable.ic_launcher_background)
+//                .setLargeIcon(
+//                    BitmapFactory.decodeResource(this.resources,
+//                        R.drawable.ic_launcher_background))
+//                .setContentIntent(pendingIntent)
+//        } else {
+//
+//            builder = Notification.Builder(this)
+//                .setContentTitle(spinnerDynamic.selectedItem.toString())
+//                .setContentText(date + " - " + time)
+//                .setSmallIcon(R.drawable.ic_launcher_background)
+//                .setLargeIcon(
+//                    BitmapFactory.decodeResource(this.resources,
+//                        R.drawable.ic_launcher_background))
+//                .setContentIntent(pendingIntent)
+//        }
+//
+//        notificationManager.notify(1234,builder.build())
+//    }
