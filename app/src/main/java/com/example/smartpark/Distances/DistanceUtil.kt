@@ -1,6 +1,14 @@
 package com.example.smartpark.Distances
 
+import android.util.Log
 import com.example.smartpark.Data.Institutes
+import okhttp3.*
+import java.net.Authenticator
+import java.net.PasswordAuthentication
+import java.net.URI
+import org.json.JSONObject
+import java.io.IOException
+import java.net.HttpURLConnection
 
 class DistanceUtil {
     companion object {
@@ -18,22 +26,27 @@ class DistanceUtil {
             return d
         }
 
-        fun calculateDistances(target: Int): MutableList<Int> {
+        fun getNearInstitutes(target: Int): MutableList<Int> {
+
             val listInstitutes = Institutes.getInstitutesList()
             var listNearInstitutes: MutableList<Int> = mutableListOf<Int>()
             val minimumDistance = 300.0
 
             for (i in 0..listInstitutes.size - 1) {
-                var distance = haversine(listInstitutes.get(target).latitude,
+                var distance = haversine(
+                    listInstitutes.get(target).latitude,
                     listInstitutes.get(target).longitude,
                     listInstitutes.get(i).latitude,
-                    listInstitutes.get(i).longitude)
-                if(distance <= minimumDistance) {
+                    listInstitutes.get(i).longitude
+                )
+                if (distance <= minimumDistance) {
                     listNearInstitutes.add(i)
                 }
             }
 
             return listNearInstitutes
         }
+
+
     }
 }
