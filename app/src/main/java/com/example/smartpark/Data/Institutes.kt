@@ -1,29 +1,115 @@
 package com.example.smartpark.Data
 
+import com.example.smartpark.Models.Institute
+
 class Institutes private constructor(){
     companion object {
         fun getInstitutesList() : List<Institute> = listOf(
-            Institute("CECOM - Centro de Saúde da Comunidade", -22.827897, -47.064050),
-            Institute("FCM - Faculdade de Ciências Médicas", -22.829864, -47.063176),
-            Institute("FE - Faculdade de Educação", -22.816552, -47.065786),
-            Institute("FEA - Faculdade de Engenharia de Alimentos", -22.820162, -47.067281),
-            Institute("FEAGRI - Faculdade de Engenharia Agrícola", -22.819103, -47.060862),
-            Institute("FEC - Faculdade de Engenharia Civil", -22.816386, -47.062050),
-            Institute("FEEC - Faculdade de Eng. Elétrica e Comp.", -22.820907, -47.066363),
-            Institute("FEF - Faculdade de Educação Física", -22.815121, -47.072646),
-            Institute("FEM - Faculdade de Egenharia Mecânica", -22.819458, -47.065951),
-            Institute("FENF - Faculdade de Enfermagem", -22.830861, -47.063238),
-            Institute("FEQ - Faculdade de Engenharia Química", -22.821104, -47.064465),
-            Institute("IA - Instituto de Artes", -22.815354, -47.064491),
-            Institute("IB - Instituto de Biologia", -22.818584, -47.069869),
-            Institute("IC - Instituto de Computação", -22.814772, -47.064560),
-            Institute("IE - Instituto de Economia", -22.814785, -47.065510),
-            Institute("IEL - Instituto de Estudos da Linguagem", -22.815167, -47.069351),
-            Institute("IFCH - Instituto de Filosofia e Ciências Humanas", -22.814970, -47.067984),
-            Institute("IFGW - Instituto de Física Gleb Wataghin", -22.817561, -47.067180),
-            Institute("IG - Instituto de Geociências", -22.813279, -47.069016),
-            Institute("IMECC - Instituto de Matemática, Est. e Comp.", -22.815771, -47.067642),
-            Institute("IQ - Instituto de Química", -22.819143, -47.067883)
+            Institute(
+                "CECOM - Centro de Saúde da Comunidade",
+                -22.827897,
+                -47.064050
+            ),
+            Institute(
+                "FCM - Faculdade de Ciências Médicas",
+                -22.829864,
+                -47.063176
+            ),
+            Institute(
+                "FE - Faculdade de Educação",
+                -22.816552,
+                -47.065786
+            ),
+            Institute(
+                "FEA - Faculdade de Engenharia de Alimentos",
+                -22.820162,
+                -47.067281
+            ),
+            Institute(
+                "FEAGRI - Faculdade de Engenharia Agrícola",
+                -22.819103,
+                -47.060862
+            ),
+            Institute(
+                "FEC - Faculdade de Engenharia Civil",
+                -22.816386,
+                -47.062050
+            ),
+            Institute(
+                "FEEC - Faculdade de Eng. Elétrica e Comp.",
+                -22.820907,
+                -47.066363
+            ),
+            Institute(
+                "FEF - Faculdade de Educação Física",
+                -22.815121,
+                -47.072646
+            ),
+            Institute(
+                "FEM - Faculdade de Egenharia Mecânica",
+                -22.819458,
+                -47.065951
+            ),
+            Institute(
+                "FENF - Faculdade de Enfermagem",
+                -22.830861,
+                -47.063238
+            ),
+            Institute(
+                "FEQ - Faculdade de Engenharia Química",
+                -22.821104,
+                -47.064465
+            ),
+            Institute(
+                "IA - Instituto de Artes",
+                -22.815354,
+                -47.064491
+            ),
+            Institute(
+                "IB - Instituto de Biologia",
+                -22.818584,
+                -47.069869
+            ),
+            Institute(
+                "IC - Instituto de Computação",
+                -22.814772,
+                -47.064560
+            ),
+            Institute(
+                "IE - Instituto de Economia",
+                -22.814785,
+                -47.065510
+            ),
+            Institute(
+                "IEL - Instituto de Estudos da Linguagem",
+                -22.815167,
+                -47.069351
+            ),
+            Institute(
+                "IFCH - Instituto de Filosofia e Ciências Humanas",
+                -22.814970,
+                -47.067984
+            ),
+            Institute(
+                "IFGW - Instituto de Física Gleb Wataghin",
+                -22.817561,
+                -47.067180
+            ),
+            Institute(
+                "IG - Instituto de Geociências",
+                -22.813279,
+                -47.069016
+            ),
+            Institute(
+                "IMECC - Instituto de Matemática, Est. e Comp.",
+                -22.815771,
+                -47.067642
+            ),
+            Institute(
+                "IQ - Instituto de Química",
+                -22.819143,
+                -47.067883
+            )
         )
 
         fun getInstituteNamesList() : MutableList<String> {

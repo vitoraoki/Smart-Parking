@@ -1,17 +1,16 @@
-package com.example.smartpark.Views
+package com.example.smartpark.Broadcast
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.example.smartpark.Data.DatabaseHandler
 import com.example.smartpark.Data.Institutes
 import com.example.smartpark.Distances.DistanceUtil
 import com.example.smartpark.R
-import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
@@ -106,15 +105,15 @@ class NotificationReceiver : BroadcastReceiver() {
     private fun nearestInstituteHasParkingLots(target: Int, context: Context, intent: Intent) {
 
         val keys = parkingLotsNumberPerInstitute.keys()
-
         var text: String
 
-        // Verify there are no parking lots
+        // Verify if there are no parking lots
         if(keys.hasNext() == false) {
             text = "Nenhum estacionamento próximo com vagas"
         } else {
             var nearestInstitute = -1
             var smallestDistance = -1.0
+
             // Iterate over all the institutes which has parking lots to discover the nearest
             while (keys.hasNext()) {
                 val key = keys.next()
@@ -143,6 +142,7 @@ class NotificationReceiver : BroadcastReceiver() {
             text = listInstitutes.get(nearestInstitute).instituteName
 
             buildNotification(context, intent, text)
+            deleteNotificationFromDataBase(context, intent.getIntExtra("id", 0).toString())
         }
     }
 
@@ -160,6 +160,11 @@ class NotificationReceiver : BroadcastReceiver() {
             getDataFromKonker(i, intent.getStringExtra("spinnerIndex").toInt(), context, intent)
         }
 
+    }
+
+    private fun deleteNotificationFromDataBase(context: Context, notificationId: String) {
+        val dbHelper = DatabaseHandler(context)
+        dbHelper.deleteNotification(notificationId)
     }
 
 }

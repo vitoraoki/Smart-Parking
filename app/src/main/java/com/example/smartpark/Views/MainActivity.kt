@@ -1,13 +1,10 @@
 package com.example.smartpark.Views
 
 import android.app.*
-import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
@@ -15,11 +12,13 @@ import android.widget.TimePicker
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.example.smartpark.Broadcast.NotificationReceiver
+import com.example.smartpark.Data.DatabaseHandler
 import com.example.smartpark.Data.Institutes
+import com.example.smartpark.Models.Notification
 import com.example.smartpark.R
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -53,6 +52,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog
         sendButton.setOnClickListener(this)
         datePicker.setOnClickListener(this)
         timePicker.setOnClickListener(this)
+        goToListNotifications.setOnClickListener(this)
     }
 
     // Load all values to put in the Spinner that show all institutes
@@ -83,6 +83,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog
         // Deal with the click of the button "Selecione uma hora"
         else if (id == R.id.timePicker) {
             openTimePickerDialog()
+        }
+        // Deal with the click of the button "Cancelar Alarme"
+        else if (id == R.id.goToListNotifications) {
+            val intent = Intent(this, ListNotifications::class.java)
+            startActivity(intent)
         }
     }
 
@@ -146,12 +151,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
 
-        val idNotification = (System.currentTimeMillis() and 0xfffffff).toInt()
-        intent.putExtra("id", idNotification)
+        val notificationId = (System.currentTimeMillis() and 0xfffffff).toInt()
+        intent.putExtra("id", notificationId)
         intent.putExtra("institute", spinnerDynamic.selectedItem.toString())
         intent.putExtra("dateAndTime", date + " - " + time)
         intent.putExtra("spinnerIndex", spinnerDynamic.selectedItemPosition.toString())
-        val pendingIntent: PendingIntent = PendingIntent.getBroadcast(this, idNotification, intent, 0)
+        val pendingIntent: PendingIntent = PendingIntent.getBroadcast(this, notificationId, intent, 0)
 
         alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
 
@@ -166,45 +171,32 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, dateTime, pendingIntent)
             }
+            insertNotificationInDataBase(notificationId.toString(), spinnerDynamic.selectedItem.toString())
             Toast.makeText(this, "Alarme criado com sucesso", Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(this, "Escolha uma data e hora posterior a atual", Toast.LENGTH_LONG).show()
         }
     }
-}
 
-//    private fun sendNotification() {
-//
-//        notificationManager =
-//            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-//
-//        val intent = Intent(this, MainActivity::class.java).apply {
+    // Insert the new notification in database
+    private fun insertNotificationInDataBase(notificationId: String, instituteName: String) {
+        val dbHelper = DatabaseHandler(this)
+        var notification = Notification()
+
+        // Build the notification that will be stored in database
+        notification.setNotificationId(notificationId)
+        notification.setInstituteName(instituteName)
+        notification.setDate(date)
+        notification.setTime(time)
+        dbHelper.insertNotification(notification)
+    }
+
+//    private fun cancelNotification() {
+//        alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+//        val intent = Intent(this, NotificationReceiver::class.java).apply {
 //            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 //        }
-//        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//
-//            notificationManager.createNotificationChannel(notificationChannel)
-//            builder = Notification.Builder(this,channelId)
-//                .setContentTitle(spinnerDynamic.selectedItem.toString())
-//                .setContentText(date + " - " + time)
-//                .setSmallIcon(R.drawable.ic_launcher_background)
-//                .setLargeIcon(
-//                    BitmapFactory.decodeResource(this.resources,
-//                        R.drawable.ic_launcher_background))
-//                .setContentIntent(pendingIntent)
-//        } else {
-//
-//            builder = Notification.Builder(this)
-//                .setContentTitle(spinnerDynamic.selectedItem.toString())
-//                .setContentText(date + " - " + time)
-//                .setSmallIcon(R.drawable.ic_launcher_background)
-//                .setLargeIcon(
-//                    BitmapFactory.decodeResource(this.resources,
-//                        R.drawable.ic_launcher_background))
-//                .setContentIntent(pendingIntent)
-//        }
-//
-//        notificationManager.notify(1234,builder.build())
+//        val pendingIntent: PendingIntent = PendingIntent.getBroadcast(this, idNotification, intent, 0)
+//        alarmManager.cancel(pendingIntent)
 //    }
+}
