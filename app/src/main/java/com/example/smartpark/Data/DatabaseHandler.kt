@@ -33,7 +33,7 @@ class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
     }
 
     // Insert the new notification to the database
-    fun insertNotification(notification: Notification) {
+    fun insertNotification(notification: Notification): Long {
         val writeDB = this.writableDatabase
         var cv = ContentValues()
 
@@ -44,13 +44,8 @@ class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
 
         var result = writeDB.insert(TABLE_NAME, null, cv)
 
-        if(result == -1.toLong()) {
-            Toast.makeText(context, "Erro ao inserir dados no banco", Toast.LENGTH_LONG).show()
-        } else {
-            Toast.makeText(context, "Dado inserido no banco", Toast.LENGTH_LONG).show()
-        }
-
         writeDB.close()
+        return result
     }
 
     // Read all the notifications that are stored in database
@@ -84,21 +79,15 @@ class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
     }
 
     // Delete a notification from database
-    fun deleteNotification(notificationId: String) {
+    fun deleteNotification(notificationId: String): Int {
         val writeDB = this.writableDatabase
 
         // Query to delete a notification based on its notification id
         val queryDelete = COL_NOTIFICATION_ID + " = " + notificationId
-
         val result = writeDB.delete(TABLE_NAME, queryDelete, null)
 
-        if(result == -1) {
-            Toast.makeText(context, "Erro ao deletar a notificação", Toast.LENGTH_LONG).show()
-        } else {
-//            Toast.makeText(context, "Notificação deletada com sucesso", Toast.LENGTH_LONG).show()
-        }
-
         writeDB.close()
+        return result
     }
 
 }

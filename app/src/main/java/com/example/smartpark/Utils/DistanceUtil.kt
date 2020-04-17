@@ -1,14 +1,6 @@
-package com.example.smartpark.Distances
+package com.example.smartpark.Utils
 
-import android.util.Log
 import com.example.smartpark.Data.Institutes
-import okhttp3.*
-import java.net.Authenticator
-import java.net.PasswordAuthentication
-import java.net.URI
-import org.json.JSONObject
-import java.io.IOException
-import java.net.HttpURLConnection
 
 class DistanceUtil {
     companion object {

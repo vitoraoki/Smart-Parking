@@ -9,7 +9,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.smartpark.Data.DatabaseHandler
 import com.example.smartpark.Data.Institutes
-import com.example.smartpark.Distances.DistanceUtil
+import com.example.smartpark.Utils.DistanceUtil
 import com.example.smartpark.R
 import okhttp3.*
 import org.json.JSONObject
@@ -65,7 +65,9 @@ class NotificationReceiver : BroadcastReceiver() {
         val client = OkHttpClient()
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                println("Fail to get data")
+                val text = "Erro ao obter os dados de vagas nos estacionamentos"
+                deleteNotificationFromDataBase(context, intent.getIntExtra("id", 0).toString())
+                buildNotification(context, intent, text)
             }
 
             override fun onResponse(call: Call, response: Response) {

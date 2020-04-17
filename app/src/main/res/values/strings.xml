@@ -1,9 +1,23 @@
 <resources>
     <string name="app_name">Smart Park</string>
-    <string-array name="weight_values">
-        <item>Gramas</item>
-        <item>Kilo</item>
-        <item>Arrobas</item>
-        <item>Toneladas</item>
-    </string-array>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="home_second">Home Second</string>
+
+    <!--Text in the main page-->
+    <string name="main_text">
+        Bem vindo(a) ao app Smart Campus. Escolha abaixo uma das opções de criação de notificação.
+        Caso haja alguma dúvida em relação a criação de cada notificação, consulte o menu de ajuda
+        localizado no canto superior direito de cada página.
+    </string>
 </resources>
