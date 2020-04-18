@@ -105,7 +105,7 @@ class SingleNotification : AppCompatActivity(), View.OnClickListener, DatePicker
     private fun openTimePickerDialog() {
         val calendar = Calendar.getInstance()
         val hourOfDay = calendar.get(Calendar.HOUR_OF_DAY)
-        val minute = calendar.get(Calendar.MINUTE)
+        val minute = calendar.get(Calendar.MINUTE) + 1
 
         TimePickerDialog(this, this, hourOfDay, minute, true).show()
     }

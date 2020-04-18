@@ -8,14 +8,19 @@ import android.widget.Toast
 import com.example.smartpark.R
 import kotlinx.android.synthetic.main.activity_list_notifications.*
 import kotlinx.android.synthetic.main.activity_main.*
+import android.content.SharedPreferences
+import android.util.Log
+import com.example.smartpark.Models.AuthorizationRepository
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
+
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         setButtonsListeners()
+        sharedPreferences = this.getSharedPreferences("access-tokens", 0)
     }
 
     private fun setButtonsListeners() {
