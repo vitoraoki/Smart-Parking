@@ -1,27 +1,19 @@
 package com.example.smartpark.Views
 
 import android.app.*
-import android.content.Intent
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.TimePicker
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import com.example.smartpark.Broadcast.NotificationReceiver
-import com.example.smartpark.Data.DatabaseHandler
 import com.example.smartpark.Data.Institutes
-import com.example.smartpark.Models.Notification
+import com.example.smartpark.Models.NotificationsSetter
 import com.example.smartpark.R
 import kotlinx.android.synthetic.main.activity_single_notification.*
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class SingleNotification : AppCompatActivity(), View.OnClickListener, DatePickerDialog.OnDateSetListener,
@@ -32,17 +24,14 @@ class SingleNotification : AppCompatActivity(), View.OnClickListener, DatePicker
     private val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
     private val simpleHourFormat = SimpleDateFormat("HH:mm")
 
-    lateinit var alarmManager : AlarmManager
-    lateinit var notificationManager : NotificationManager
-    lateinit var notificationChannel : NotificationChannel
-    private val channelId = "i.apps.notifications"
-    private val description = "Test notification"
+    private lateinit var notification: NotificationsSetter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_single_notification)
 
-        createNotificationChannel()
+        notification = NotificationsSetter(this)
+
         loadSpinnerInstitutes()
         setListeners()
     }
@@ -70,7 +59,8 @@ class SingleNotification : AppCompatActivity(), View.OnClickListener, DatePicker
         if (id == R.id.sendButton) {
 
             // Set a notification alarm to the date and hour given
-            setNotification()
+            notification.setNotification(spinnerDynamic.selectedItem.toString(),
+                date, time, spinnerDynamic.selectedItemPosition.toString(), 0)
         }
         // Deal with the click of the button "Selecione uma data"
         else if (id == R.id.datePicker) {
@@ -119,74 +109,5 @@ class SingleNotification : AppCompatActivity(), View.OnClickListener, DatePicker
         calendar.set(year, month, day, hourOfDay, minute)
         time = simpleHourFormat.format(calendar.time)
         timePicker.text = time
-    }
-
-    private fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
-            // Create the channel for the notification
-            notificationChannel = NotificationChannel(
-                channelId,description,NotificationManager.IMPORTANCE_HIGH)
-            notificationChannel.enableLights(true)
-            notificationChannel.lightColor = Color.GREEN
-            notificationChannel.enableVibration(true)
-
-            notificationManager = getSystemService(NotificationManager::class.java)
-            notificationManager.createNotificationChannel(notificationChannel)
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun setNotification() {
-        val intent = Intent(this, NotificationReceiver::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-
-        val notificationId = (System.currentTimeMillis() and 0xfffffff).toInt()
-        intent.putExtra("id", notificationId)
-        intent.putExtra("institute", spinnerDynamic.selectedItem.toString())
-        intent.putExtra("dateAndTime", date + " - " + time)
-        intent.putExtra("spinnerIndex", spinnerDynamic.selectedItemPosition.toString())
-        val pendingIntent: PendingIntent = PendingIntent.getBroadcast(this, notificationId, intent, 0)
-
-        alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
-
-        var timeAtButtonClick = System.currentTimeMillis()
-        val dateTime = LocalDateTime.parse(date + " " + time,
-            DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
-            .atZone(ZoneId.of("America/Sao_Paulo"))
-            .toInstant()
-            .toEpochMilli()
-
-        if((dateTime - timeAtButtonClick) >= 0) {
-
-            // First try to add the notification in database
-            val result = insertNotificationInDataBase(notificationId.toString(), spinnerDynamic.selectedItem.toString())
-
-            // If the data was successfully added to database, create the alarm notification
-            if(result != -1.toLong()) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, dateTime, pendingIntent)
-                    Toast.makeText(this, "Alarme criado com sucesso", Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                Toast.makeText(this, "Erro ao criar o alarme", Toast.LENGTH_SHORT).show()
-            }
-        } else {
-            Toast.makeText(this, "Escolha uma data e hora posterior a atual", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    // Insert the new notification in database
-    private fun insertNotificationInDataBase(notificationId: String, instituteName: String): Long {
-        val dbHelper = DatabaseHandler(this)
-        var notification = Notification()
-
-        // Build the notification that will be stored in database
-        notification.setNotificationId(notificationId)
-        notification.setInstituteName(instituteName)
-        notification.setDate(date)
-        notification.setTime(time)
-        return dbHelper.insertNotification(notification)
     }
 }

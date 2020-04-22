@@ -7,6 +7,7 @@ class Notification {
     private var instituteName = ""
     private var date = ""
     private var time = ""
+    private var repetitive = 0
 
     fun getId(): Int {
         return this.id
@@ -46,5 +47,13 @@ class Notification {
 
     fun setTime(time: String) {
         this.time = time
+    }
+
+    fun getRepetitive(): Int {
+        return this.repetitive
+    }
+
+    fun setRepetitive(repetitive: Int) {
+        this.repetitive = repetitive
     }
 }

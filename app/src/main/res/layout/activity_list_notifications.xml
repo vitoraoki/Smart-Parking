@@ -7,10 +7,89 @@
     android:orientation="vertical"
     tools:context=".Views.ListNotifications">
 
-    <ListView
-        android:id="@+id/notificationsList"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </ListView>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="9dp"
+        android:paddingRight="9dp"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:id="@+id/singleNtfList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/list_toggle_single_ntf"
+            android:textSize="16sp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/repetitiveNtfList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/list_toggle_repetitive_ntf"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp">
+
+        <Button
+            android:id="@+id/btnToggleSingle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btnToggleSingle"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btnToggleRepetitive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btnToggleRepetitive"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="9dp"
+        android:paddingRight="9dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="2dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/titleListSingle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/list_single_ntf"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/titleListRepetitive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/list_repetitive_ntf"
+            android:textSize="16sp"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/notificationsList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
 
 </LinearLayout>

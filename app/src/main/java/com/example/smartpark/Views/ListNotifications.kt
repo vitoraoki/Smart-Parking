@@ -16,20 +16,52 @@ import com.example.smartpark.R
 import kotlinx.android.synthetic.main.activity_list_notifications.*
 import kotlinx.android.synthetic.main.delete_notification_dialog.*
 
-class ListNotifications : AppCompatActivity() {
+class ListNotifications : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_notifications)
 
-        showAllNotifications()
+        showAllNotifications(0)
+        setListeners()
+    }
+
+    private fun setListeners() {
+        btnToggleSingle.setOnClickListener(this)
+        btnToggleRepetitive.setOnClickListener(this)
+    }
+
+    override fun onClick(view: View) {
+        val id = view.id
+
+        // Show the single notifications
+        if (id == R.id.btnToggleSingle) {
+            showAllNotifications(0)
+            singleNtfList.visibility = View.GONE
+            repetitiveNtfList.visibility = View.VISIBLE
+            btnToggleSingle.visibility = View.GONE
+            btnToggleRepetitive.visibility = View.VISIBLE
+            titleListSingle.visibility = View.VISIBLE
+            titleListRepetitive.visibility = View.GONE
+
+        }
+        // Show the repetitive notifications
+        else if (id == R.id.btnToggleRepetitive) {
+            showAllNotifications(1)
+            singleNtfList.visibility = View.VISIBLE
+            repetitiveNtfList.visibility = View.GONE
+            btnToggleSingle.visibility = View.VISIBLE
+            btnToggleRepetitive.visibility = View.GONE
+            titleListSingle.visibility = View.GONE
+            titleListRepetitive.visibility = View.VISIBLE
+        }
     }
 
     // Get all the notifications stored and show in a list
-    private fun showAllNotifications() {
+    private fun showAllNotifications(repetitive: Int) {
         // Get all the notifications stored
         val dbHelper = DatabaseHandler(this)
-        var notifications = dbHelper.readAllNotification()
+        var notifications = dbHelper.readAllNotification(repetitive)
 
         // Inflate the listView with all the notifications stored
         val notificationAdapter = NotificationListAdapter(
@@ -98,7 +130,7 @@ class ListNotifications : AppCompatActivity() {
         }
 
         // Reload the list of notifications
-        showAllNotifications()
+        showAllNotifications(0)
     }
 }
 

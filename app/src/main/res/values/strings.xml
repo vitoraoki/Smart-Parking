@@ -20,4 +20,28 @@
         Caso haja alguma dúvida em relação a criação de cada notificação, consulte o menu de ajuda
         localizado no canto superior direito de cada página.
     </string>
+
+    <!--Text to change type of list of notifications-->
+    <string name="list_toggle_single_ntf">
+        Click abaixo para ver a lista de notificações únicas:
+    </string>
+    <string name="list_toggle_repetitive_ntf">
+        Click abaixo para ver a lista de notificações repetitivas:
+    </string>
+
+    <!--Text to show list of notifications-->
+    <string name="list_single_ntf">
+        Lista de notificações únicas:
+    </string>
+    <string name="list_repetitive_ntf">
+        Lista de notificações repetitivas:
+    </string>
+
+    <!--Button titles of list notifications-->
+    <string name="btnToggleSingle">
+        Notificações únicas
+    </string>
+    <string name="btnToggleRepetitive">
+        Notificações repetitivas
+    </string>
 </resources>

@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import android.widget.Toast
 import com.example.smartpark.Models.Notification
 
@@ -14,6 +15,7 @@ val COL_NOTIFICATION_ID = "notificationId"
 val COL_INSTITUTE_NAME = "instituteName"
 val COL_DATE = "date"
 val COL_TIME = "time"
+val COL_REPETITIVE = "repetitive"
 
 class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, 1) {
     override fun onCreate(db: SQLiteDatabase?) {
@@ -23,7 +25,8 @@ class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
                 COL_NOTIFICATION_ID + " VARCHAR(256)," +
                 COL_INSTITUTE_NAME + " VARCHAR(256)," +
                 COL_DATE + " VARCHAR(256)," +
-                COL_TIME + " VARCHAR(256))"
+                COL_TIME + " VARCHAR(256)," +
+                COL_REPETITIVE + " INTEGER)"
 
         db?.execSQL(createTable)
     }
@@ -41,6 +44,7 @@ class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
         cv.put(COL_INSTITUTE_NAME, notification.getInstituteName())
         cv.put(COL_DATE, notification.getDate())
         cv.put(COL_TIME, notification.getTime())
+        cv.put(COL_REPETITIVE, notification.getRepetitive())
 
         var result = writeDB.insert(TABLE_NAME, null, cv)
 
@@ -49,12 +53,12 @@ class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
     }
 
     // Read all the notifications that are stored in database
-    fun readAllNotification() :MutableList<Notification> {
+    fun readAllNotification(repetitive: Int) :MutableList<Notification> {
         var notifications : MutableList<Notification> = ArrayList()
 
         // Query all the notifications
         val readDB = this.readableDatabase
-        val query = "SELECT * FROM " + TABLE_NAME
+        val query = "SELECT * FROM $TABLE_NAME WHERE $COL_REPETITIVE = $repetitive"
         val result = readDB.rawQuery(query, null)
 
         if (result.moveToFirst()) {
