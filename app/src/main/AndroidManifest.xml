@@ -4,7 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
     <application
         android:allowBackup="true"
@@ -13,8 +14,8 @@
         android:roundIcon="@drawable/smart_campus"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<!--        android:usesCleartextTraffic="true">-->
-
+        <activity android:name=".Views.NearInstitutesParkingLots"></activity>
+        <!-- android:usesCleartextTraffic="true"> -->
         <activity android:name=".Views.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,9 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Views.ListNotifications"></activity>
-        <activity android:name=".Views.SingleNotification"></activity>
+        <activity android:name=".Views.ListEvents" />
+        <activity android:name=".Views.SingleEvent" />
 
         <receiver
             android:name=".Broadcast.NotificationReceiver"
@@ -34,7 +34,6 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>

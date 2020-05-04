@@ -43,10 +43,10 @@
             android:padding="10dp"
             android:gravity="center">
             <Button
-                android:id="@+id/singleNotification"
+                android:id="@+id/singleEvent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Criar notificação única" />
+                android:text="Criar evento único" />
         </LinearLayout>
 
         <LinearLayout
@@ -55,10 +55,10 @@
             android:padding="10dp"
             android:gravity="center">
             <Button
-                android:id="@+id/repetitiveNotifications"
+                android:id="@+id/repetitiveEvents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Criar notificação repetitiva" />
+                android:text="Criar evento repetitivo" />
         </LinearLayout>
 
         <LinearLayout
@@ -67,10 +67,10 @@
             android:padding="10dp"
             android:gravity="center">
             <Button
-                android:id="@+id/goToListNotifications"
+                android:id="@+id/listEvents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lista de notificações" />
+                android:text="Lista de eventos" />
         </LinearLayout>
 
     </LinearLayout>

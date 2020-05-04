@@ -1,10 +1,11 @@
-package com.example.smartpark.Models
+package com.example.smartpark.Authorization
 
 import okhttp3.Interceptor
 import okhttp3.Response
 
 class AuthorizationInterceptor(
-    private val authorizationRepository: AuthorizationRepository) : Interceptor {
+    private val authorizationRepository: AuthorizationRepository
+) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         var accessToken: String
 

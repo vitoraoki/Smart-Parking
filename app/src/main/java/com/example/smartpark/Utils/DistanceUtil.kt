@@ -38,7 +38,5 @@ class DistanceUtil {
 
             return listNearInstitutes
         }
-
-
     }
 }

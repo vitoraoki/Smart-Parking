@@ -16,32 +16,32 @@
 
     <!--Text in the main page-->
     <string name="main_text">
-        Bem vindo(a) ao app Smart Campus. Escolha abaixo uma das opções de criação de notificação.
-        Caso haja alguma dúvida em relação a criação de cada notificação, consulte o menu de ajuda
+        Bem vindo(a) ao app Smart Campus. Escolha abaixo uma das opções de criação de evento.
+        Caso haja alguma dúvida em relação a criação de cada evento, consulte o menu de ajuda
         localizado no canto superior direito de cada página.
     </string>
 
-    <!--Text to change type of list of notifications-->
-    <string name="list_toggle_single_ntf">
-        Click abaixo para ver a lista de notificações únicas:
+    <!--Text to change type of list of events-->
+    <string name="list_toggle_single_event">
+        Click abaixo para ver a lista de eventos únicos:
     </string>
-    <string name="list_toggle_repetitive_ntf">
-        Click abaixo para ver a lista de notificações repetitivas:
-    </string>
-
-    <!--Text to show list of notifications-->
-    <string name="list_single_ntf">
-        Lista de notificações únicas:
-    </string>
-    <string name="list_repetitive_ntf">
-        Lista de notificações repetitivas:
+    <string name="list_toggle_repetitive_event">
+        Click abaixo para ver a lista de eventos repetitivos:
     </string>
 
-    <!--Button titles of list notifications-->
+    <!--Text to show list of events-->
+    <string name="list_single_event">
+        Lista de eventos únicos:
+    </string>
+    <string name="list_repetitive_event">
+        Lista de eventos repetitivos:
+    </string>
+
+    <!--Button titles of list events-->
     <string name="btnToggleSingle">
-        Notificações únicas
+        Eventos únicos
     </string>
     <string name="btnToggleRepetitive">
-        Notificações repetitivas
+        Eventos repetitivos
     </string>
 </resources>

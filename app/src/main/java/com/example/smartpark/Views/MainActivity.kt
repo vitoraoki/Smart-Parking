@@ -6,11 +6,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.example.smartpark.R
-import kotlinx.android.synthetic.main.activity_list_notifications.*
 import kotlinx.android.synthetic.main.activity_main.*
 import android.content.SharedPreferences
-import android.util.Log
-import com.example.smartpark.Models.AuthorizationRepository
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -24,26 +21,26 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setButtonsListeners() {
-        singleNotification.setOnClickListener(this)
-        repetitiveNotifications.setOnClickListener(this)
-        goToListNotifications.setOnClickListener(this)
+        singleEvent.setOnClickListener(this)
+        repetitiveEvents.setOnClickListener(this)
+        listEvents.setOnClickListener(this)
     }
 
     override fun onClick(view: View) {
         val id = view.id
 
-        // Go to single notification activity
-        if (id == R.id.singleNotification) {
-            val intent = Intent(this, SingleNotification::class.java)
+        // Go to single event activity
+        if (id == R.id.singleEvent) {
+            val intent = Intent(this, SingleEvent::class.java)
             startActivity(intent)
         }
-        // Go to repetitive notification activity
-        else if (id == R.id.repetitiveNotifications) {
+        // Go to repetitive event activity
+        else if (id == R.id.repetitiveEvents) {
             Toast.makeText(this, "Em breve", Toast.LENGTH_SHORT).show()
         }
-        // Go to list of notifications stored
-        else if (id == R.id.goToListNotifications) {
-            val intent = Intent(this, ListNotifications::class.java)
+        // Go to list of events stored
+        else if (id == R.id.listEvents) {
+            val intent = Intent(this, ListEvents::class.java)
             startActivity(intent)
         }
     }

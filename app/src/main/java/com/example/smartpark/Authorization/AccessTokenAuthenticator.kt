@@ -1,5 +1,4 @@
-package com.example.smartpark.Models
-import android.util.Log
+package com.example.smartpark.Authorization
 import okhttp3.Authenticator
 import okhttp3.Response
 import okhttp3.*

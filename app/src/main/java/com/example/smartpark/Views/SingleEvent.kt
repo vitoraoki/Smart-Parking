@@ -7,16 +7,17 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.TimePicker
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.smartpark.Data.Institutes
-import com.example.smartpark.Models.NotificationsSetter
+import com.example.smartpark.Utils.EventsSetter
 import com.example.smartpark.R
-import kotlinx.android.synthetic.main.activity_single_notification.*
+import kotlinx.android.synthetic.main.activity_single_event.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SingleNotification : AppCompatActivity(), View.OnClickListener, DatePickerDialog.OnDateSetListener,
+class SingleEvent : AppCompatActivity(), View.OnClickListener, DatePickerDialog.OnDateSetListener,
     TimePickerDialog.OnTimeSetListener {
 
     private var date = ""
@@ -24,13 +25,13 @@ class SingleNotification : AppCompatActivity(), View.OnClickListener, DatePicker
     private val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
     private val simpleHourFormat = SimpleDateFormat("HH:mm")
 
-    private lateinit var notification: NotificationsSetter
+    private lateinit var event: EventsSetter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_single_notification)
+        setContentView(R.layout.activity_single_event)
 
-        notification = NotificationsSetter(this)
+        event = EventsSetter(this)
 
         loadSpinnerInstitutes()
         setListeners()
@@ -57,10 +58,10 @@ class SingleNotification : AppCompatActivity(), View.OnClickListener, DatePicker
 
         // Deal with the click of the button "Enviar"
         if (id == R.id.sendButton) {
-
-            // Set a notification alarm to the date and hour given
-            notification.setNotification(spinnerDynamic.selectedItem.toString(),
-                date, time, spinnerDynamic.selectedItemPosition.toString(), 0)
+            val eventId = (System.currentTimeMillis() and 0xfffffff).toInt()
+            event.insertEventInDataBase(eventId.toString(), spinnerDynamic.selectedItemPosition,
+                spinnerDynamic.selectedItem.toString(), date, time, 0)
+            Toast.makeText(this, "Evento salvo", Toast.LENGTH_SHORT).show()
         }
         // Deal with the click of the button "Selecione uma data"
         else if (id == R.id.datePicker) {

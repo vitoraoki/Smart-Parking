@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Deseja apagar a notificação?"
+            android:text="Deseja apagar o evento?"
             android:textSize="20sp"
             android:textColor="#006197"
             android:textStyle="bold"/>

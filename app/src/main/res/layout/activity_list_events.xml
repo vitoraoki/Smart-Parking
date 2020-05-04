@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Views.ListNotifications">
+    tools:context=".Views.ListEvents">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,18 +16,18 @@
         android:paddingTop="5dp">
 
         <TextView
-            android:id="@+id/singleNtfList"
+            android:id="@+id/singleEventList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/list_toggle_single_ntf"
+            android:text="@string/list_toggle_single_event"
             android:textSize="16sp"
             android:visibility="gone"/>
 
         <TextView
-            android:id="@+id/repetitiveNtfList"
+            android:id="@+id/repetitiveEventList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/list_toggle_repetitive_ntf"
+            android:text="@string/list_toggle_repetitive_event"
             android:textSize="16sp"/>
 
     </LinearLayout>
@@ -68,14 +68,14 @@
             android:id="@+id/titleListSingle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/list_single_ntf"
+            android:text="@string/list_single_event"
             android:textSize="16sp"/>
 
         <TextView
             android:id="@+id/titleListRepetitive"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/list_repetitive_ntf"
+            android:text="@string/list_repetitive_event"
             android:textSize="16sp"
             android:visibility="gone"/>
 
@@ -87,7 +87,7 @@
         android:orientation="vertical">
 
         <ListView
-            android:id="@+id/notificationsList"
+            android:id="@+id/eventsList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>

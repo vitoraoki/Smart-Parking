@@ -4,14 +4,13 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.util.Log
-import android.widget.Toast
-import com.example.smartpark.Models.Notification
+import com.example.smartpark.Models.Event
 
 val DATABASE_NAME = "SmartPark"
-val TABLE_NAME = "Notifications"
+val TABLE_NAME = "Events"
 val COL_ID = "id"
-val COL_NOTIFICATION_ID = "notificationId"
+val COL_EVENT_ID = "eventId"
+val COL_INSTITUTE_ID = "instituteId"
 val COL_INSTITUTE_NAME = "instituteName"
 val COL_DATE = "date"
 val COL_TIME = "time"
@@ -22,7 +21,8 @@ class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
         val createTable = "CREATE TABLE " +
                 TABLE_NAME + " (" +
                 COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                COL_NOTIFICATION_ID + " VARCHAR(256)," +
+                COL_EVENT_ID + " VARCHAR(256)," +
+                COL_INSTITUTE_ID + " INTEGER," +
                 COL_INSTITUTE_NAME + " VARCHAR(256)," +
                 COL_DATE + " VARCHAR(256)," +
                 COL_TIME + " VARCHAR(256)," +
@@ -35,16 +35,17 @@ class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
         TODO("Not yet implemented")
     }
 
-    // Insert the new notification to the database
-    fun insertNotification(notification: Notification): Long {
+    // Insert the new event to the database
+    fun insertEvent(event: Event): Long {
         val writeDB = this.writableDatabase
         var cv = ContentValues()
 
-        cv.put(COL_NOTIFICATION_ID, notification.getNotificationId())
-        cv.put(COL_INSTITUTE_NAME, notification.getInstituteName())
-        cv.put(COL_DATE, notification.getDate())
-        cv.put(COL_TIME, notification.getTime())
-        cv.put(COL_REPETITIVE, notification.getRepetitive())
+        cv.put(COL_EVENT_ID, event.getEventId())
+        cv.put(COL_INSTITUTE_ID, event.getInstituteId())
+        cv.put(COL_INSTITUTE_NAME, event.getInstituteName())
+        cv.put(COL_DATE, event.getDate())
+        cv.put(COL_TIME, event.getTime())
+        cv.put(COL_REPETITIVE, event.getRepetitive())
 
         var result = writeDB.insert(TABLE_NAME, null, cv)
 
@@ -52,42 +53,43 @@ class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
         return result
     }
 
-    // Read all the notifications that are stored in database
-    fun readAllNotification(repetitive: Int) :MutableList<Notification> {
-        var notifications : MutableList<Notification> = ArrayList()
+    // Read all the events that are stored in database
+    fun readAllEvents(repetitive: Int) :MutableList<Event> {
+        var events : MutableList<Event> = ArrayList()
 
-        // Query all the notifications
+        // Query all the events
         val readDB = this.readableDatabase
         val query = "SELECT * FROM $TABLE_NAME WHERE $COL_REPETITIVE = $repetitive"
         val result = readDB.rawQuery(query, null)
 
         if (result.moveToFirst()) {
             do {
-                var notification = Notification()
-                notification.setId(result.getString(result.getColumnIndex(COL_ID)).toInt())
-                notification.setNotificationId(result.getString(result.getColumnIndex(
-                    COL_NOTIFICATION_ID)))
-                notification.setInstituteName(result.getString(result.getColumnIndex(
+                var event = Event()
+                event.setId(result.getString(result.getColumnIndex(COL_ID)).toInt())
+                event.setEventId(result.getString(result.getColumnIndex(
+                    COL_EVENT_ID)))
+                event.setInstituteId(result.getInt(result.getColumnIndex(COL_INSTITUTE_ID)))
+                event.setInstituteName(result.getString(result.getColumnIndex(
                     COL_INSTITUTE_NAME)))
-                notification.setDate(result.getString(result.getColumnIndex(
+                event.setDate(result.getString(result.getColumnIndex(
                     COL_DATE)))
-                notification.setTime(result.getString(result.getColumnIndex(
+                event.setTime(result.getString(result.getColumnIndex(
                     COL_TIME)))
-                notifications.add(notification)
+                events.add(event)
             } while (result.moveToNext())
         }
 
         readDB.close()
         result.close()
-        return notifications
+        return events
     }
 
-    // Delete a notification from database
-    fun deleteNotification(notificationId: String): Int {
+    // Delete an event from database
+    fun deleteEvent(eventId: String): Int {
         val writeDB = this.writableDatabase
 
-        // Query to delete a notification based on its notification id
-        val queryDelete = COL_NOTIFICATION_ID + " = " + notificationId
+        // Query to delete an event based on its notification id
+        val queryDelete = COL_EVENT_ID + " = " + eventId
         val result = writeDB.delete(TABLE_NAME, queryDelete, null)
 
         writeDB.close()

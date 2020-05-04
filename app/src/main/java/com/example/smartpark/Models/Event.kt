@@ -1,9 +1,10 @@
 package com.example.smartpark.Models
 
-class Notification {
+class Event {
 
     private var id = 0
-    private var notificationId = ""
+    private var eventId = ""
+    private var instituteId = 0
     private var instituteName = ""
     private var date = ""
     private var time = ""
@@ -17,12 +18,20 @@ class Notification {
         this.id = id
     }
 
-    fun getNotificationId(): String {
-        return this.notificationId
+    fun getEventId(): String {
+        return this.eventId
     }
 
-    fun setNotificationId(notificationId: String) {
-        this.notificationId = notificationId
+    fun setEventId(eventId: String) {
+        this.eventId = eventId
+    }
+
+    fun getInstituteId(): Int {
+        return this.instituteId
+    }
+
+    fun setInstituteId(instituteId: Int) {
+        this.instituteId = instituteId
     }
 
     fun getInstituteName(): String {
