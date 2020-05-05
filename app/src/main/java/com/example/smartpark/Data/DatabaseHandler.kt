@@ -22,7 +22,7 @@ class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
                 TABLE_NAME + " (" +
                 COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COL_EVENT_ID + " VARCHAR(256)," +
-                COL_INSTITUTE_ID + " INTEGER," +
+                COL_INSTITUTE_ID + " VARCHAR(256)," +
                 COL_INSTITUTE_NAME + " VARCHAR(256)," +
                 COL_DATE + " VARCHAR(256)," +
                 COL_TIME + " VARCHAR(256)," +
@@ -68,7 +68,7 @@ class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
                 event.setId(result.getString(result.getColumnIndex(COL_ID)).toInt())
                 event.setEventId(result.getString(result.getColumnIndex(
                     COL_EVENT_ID)))
-                event.setInstituteId(result.getInt(result.getColumnIndex(COL_INSTITUTE_ID)))
+                event.setInstituteId(result.getString(result.getColumnIndex(COL_INSTITUTE_ID)))
                 event.setInstituteName(result.getString(result.getColumnIndex(
                     COL_INSTITUTE_NAME)))
                 event.setDate(result.getString(result.getColumnIndex(

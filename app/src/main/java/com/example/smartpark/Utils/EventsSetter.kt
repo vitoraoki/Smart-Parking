@@ -13,7 +13,7 @@ class EventsSetter {
     }
 
     // Insert the new event in database
-    fun insertEventInDataBase(eventId: String, instituteId: Int, instituteName: String,
+    fun insertEventInDataBase(eventId: String, instituteId: String, instituteName: String,
                                       date: String, time: String, repetitive: Int): Long {
         val dbHelper = DatabaseHandler(context)
         var event = Event()

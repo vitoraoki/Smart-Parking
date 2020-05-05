@@ -3,6 +3,7 @@ package com.example.smartpark.Views
 import android.app.*
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
@@ -59,7 +60,11 @@ class SingleEvent : AppCompatActivity(), View.OnClickListener, DatePickerDialog.
         // Deal with the click of the button "Enviar"
         if (id == R.id.sendButton) {
             val eventId = (System.currentTimeMillis() and 0xfffffff).toInt()
-            event.insertEventInDataBase(eventId.toString(), spinnerDynamic.selectedItemPosition,
+
+            Log.d("position", spinnerDynamic.selectedItemPosition.toString())
+
+            event.insertEventInDataBase(eventId.toString(),
+                spinnerDynamic.selectedItemPosition.toString(),
                 spinnerDynamic.selectedItem.toString(), date, time, 0)
             Toast.makeText(this, "Evento salvo", Toast.LENGTH_SHORT).show()
         }

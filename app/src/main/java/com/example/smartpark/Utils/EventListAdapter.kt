@@ -1,4 +1,4 @@
-package com.example.smartpark.Data
+package com.example.smartpark.Utils
 
 import com.example.smartpark.Models.Event
 import android.content.Context

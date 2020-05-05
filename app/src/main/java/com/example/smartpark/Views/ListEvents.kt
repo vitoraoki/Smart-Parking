@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.smartpark.Data.DatabaseHandler
-import com.example.smartpark.Data.EventListAdapter
+import com.example.smartpark.Utils.EventListAdapter
 import com.example.smartpark.R
 import kotlinx.android.synthetic.main.activity_list_events.*
 import kotlinx.android.synthetic.main.delete_event_dialog.*
@@ -73,9 +73,8 @@ class ListEvents : AppCompatActivity(), View.OnClickListener {
             if (event != null) {
                 val intent = Intent(this, NearInstitutesParkingLots::class.java)
                 intent.putExtra("instituteId", event.getInstituteId())
-                intent.putExtra("instituteName", event.getInstituteName())
                 startActivity(intent)
-                deleteEvent(event.getEventId())
+//                deleteEvent(event.getEventId())
             }
         }
 

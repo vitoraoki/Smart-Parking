@@ -4,7 +4,7 @@ class Event {
 
     private var id = 0
     private var eventId = ""
-    private var instituteId = 0
+    private var instituteId = ""
     private var instituteName = ""
     private var date = ""
     private var time = ""
@@ -26,11 +26,11 @@ class Event {
         this.eventId = eventId
     }
 
-    fun getInstituteId(): Int {
+    fun getInstituteId(): String {
         return this.instituteId
     }
 
-    fun setInstituteId(instituteId: Int) {
+    fun setInstituteId(instituteId: String) {
         this.instituteId = instituteId
     }
 

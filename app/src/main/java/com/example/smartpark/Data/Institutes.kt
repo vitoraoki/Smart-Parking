@@ -6,106 +6,127 @@ class Institutes private constructor(){
     companion object {
         fun getInstitutesList() : List<Institute> = listOf(
             Institute(
+                "0",
                 "CECOM - Centro de Saúde da Comunidade",
                 -22.827897,
                 -47.064050
             ),
             Institute(
+                "1",
                 "FCM - Faculdade de Ciências Médicas",
                 -22.829864,
                 -47.063176
             ),
             Institute(
+                "2",
                 "FE - Faculdade de Educação",
                 -22.816552,
                 -47.065786
             ),
             Institute(
+                "3",
                 "FEA - Faculdade de Engenharia de Alimentos",
                 -22.820162,
                 -47.067281
             ),
             Institute(
+                "4",
                 "FEAGRI - Faculdade de Engenharia Agrícola",
                 -22.819103,
                 -47.060862
             ),
             Institute(
+                "5",
                 "FEC - Faculdade de Engenharia Civil",
                 -22.816386,
                 -47.062050
             ),
             Institute(
+                "6",
                 "FEEC - Faculdade de Eng. Elétrica e Comp.",
                 -22.820907,
                 -47.066363
             ),
             Institute(
+                "7",
                 "FEF - Faculdade de Educação Física",
                 -22.815121,
                 -47.072646
             ),
             Institute(
+                "8",
                 "FEM - Faculdade de Egenharia Mecânica",
                 -22.819458,
                 -47.065951
             ),
             Institute(
+                "9",
                 "FENF - Faculdade de Enfermagem",
                 -22.830861,
                 -47.063238
             ),
             Institute(
+                "10",
                 "FEQ - Faculdade de Engenharia Química",
                 -22.821104,
                 -47.064465
             ),
             Institute(
+                "11",
                 "IA - Instituto de Artes",
                 -22.815354,
                 -47.064491
             ),
             Institute(
+                "12",
                 "IB - Instituto de Biologia",
                 -22.818584,
                 -47.069869
             ),
             Institute(
+                "13",
                 "IC - Instituto de Computação",
                 -22.814772,
                 -47.064560
             ),
             Institute(
+                "14",
                 "IE - Instituto de Economia",
                 -22.814785,
                 -47.065510
             ),
             Institute(
+                "15",
                 "IEL - Instituto de Estudos da Linguagem",
                 -22.815167,
                 -47.069351
             ),
             Institute(
+                "16",
                 "IFCH - Instituto de Filosofia e Ciências Humanas",
                 -22.814970,
                 -47.067984
             ),
             Institute(
+                "17",
                 "IFGW - Instituto de Física Gleb Wataghin",
                 -22.817561,
                 -47.067180
             ),
             Institute(
+                "18",
                 "IG - Instituto de Geociências",
                 -22.813279,
                 -47.069016
             ),
             Institute(
+                "19",
                 "IMECC - Instituto de Matemática, Est. e Comp.",
                 -22.815771,
                 -47.067642
             ),
             Institute(
+                "20",
                 "IQ - Instituto de Química",
                 -22.819143,
                 -47.067883
@@ -114,7 +135,7 @@ class Institutes private constructor(){
 
         fun getInstituteNamesList() : MutableList<String> {
             var listInstitutesNames : MutableList<String> = mutableListOf<String>()
-            this.getInstitutesList().forEach { listInstitutesNames.add(it.instituteName) }
+            this.getInstitutesList().forEach { listInstitutesNames.add(it.getInstituteName()) }
             return listInstitutesNames
         }
     }

@@ -1,6 +1,7 @@
 package com.example.smartpark.Utils
 
 import com.example.smartpark.Data.Institutes
+import com.example.smartpark.Models.Institute
 
 class DistanceUtil {
     companion object {
@@ -15,24 +16,26 @@ class DistanceUtil {
             val c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt((1 - a)))
             val d = R * c
 
+            // Return distance in meters
             return d
         }
 
-        fun getNearInstitutes(target: Int): MutableList<Int> {
+        fun getNearInstitutes(target: Int): MutableList<Institute> {
 
             val listInstitutes = Institutes.getInstitutesList()
-            var listNearInstitutes: MutableList<Int> = mutableListOf<Int>()
+            var listNearInstitutes: MutableList<Institute> = mutableListOf()
             val minimumDistance = 300.0
 
             for (i in 0..listInstitutes.size - 1) {
                 var distance = haversine(
-                    listInstitutes.get(target).latitude,
-                    listInstitutes.get(target).longitude,
-                    listInstitutes.get(i).latitude,
-                    listInstitutes.get(i).longitude
+                    listInstitutes.get(target).getLatitude(),
+                    listInstitutes.get(target).getLongitude(),
+                    listInstitutes.get(i).getLatitude(),
+                    listInstitutes.get(i).getLongitude()
                 )
                 if (distance <= minimumDistance) {
-                    listNearInstitutes.add(i)
+                    listInstitutes.get(i).setDistance(distance)
+                    listNearInstitutes.add(listInstitutes.get(i))
                 }
             }
 
