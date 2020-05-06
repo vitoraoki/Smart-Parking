@@ -61,8 +61,6 @@ class SingleEvent : AppCompatActivity(), View.OnClickListener, DatePickerDialog.
         if (id == R.id.sendButton) {
             val eventId = (System.currentTimeMillis() and 0xfffffff).toInt()
 
-            Log.d("position", spinnerDynamic.selectedItemPosition.toString())
-
             event.insertEventInDataBase(eventId.toString(),
                 spinnerDynamic.selectedItemPosition.toString(),
                 spinnerDynamic.selectedItem.toString(), date, time, 0)

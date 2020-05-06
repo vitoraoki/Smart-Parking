@@ -28,8 +28,16 @@ class NearInstitutesListAdapter (
 
         var institute = nearInstitutes.get(position)
         nearInstituteNameView.text = institute.getInstituteName()
-        nearInstituteParkingLotsView.text = institutesParkingLots.getString(
-            institute.getInstituteId()) + " vagas"
+
+        // Verify if it is just one parking lot
+        if (institutesParkingLots.getString(
+                institute.getInstituteId()) == "1") {
+            nearInstituteParkingLotsView.text = institutesParkingLots.getString(
+                institute.getInstituteId()) + " vaga"
+        } else {
+            nearInstituteParkingLotsView.text = institutesParkingLots.getString(
+                institute.getInstituteId()) + " vagas"
+        }
 
         // If the institute is the target institute, change the layout of its row
         if (position == 0) {

@@ -1,38 +1,74 @@
 package com.example.smartpark.Views
 
-import android.annotation.SuppressLint
 import android.content.SharedPreferences
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import com.example.smartpark.Authorization.AccessTokenAuthenticator
 import com.example.smartpark.Authorization.AuthorizationInterceptor
 import com.example.smartpark.Authorization.AuthorizationRepository
-import com.example.smartpark.Data.Institutes
 import com.example.smartpark.R
 import com.example.smartpark.Utils.DistanceUtil
 import com.example.smartpark.Utils.NearInstitutesListAdapter
-import kotlinx.android.synthetic.main.activity_list_events.*
 import kotlinx.android.synthetic.main.activity_near_institutes_parking_lots.*
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
+import java.util.*
+import kotlin.concurrent.schedule
 
-class NearInstitutesParkingLots : AppCompatActivity() {
+class NearInstitutesParkingLots : AppCompatActivity(), View.OnClickListener {
 
-    val listInstitutes = Institutes.getInstitutesList()
     lateinit var sharedPreferences: SharedPreferences
+    lateinit var timer: Timer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_near_institutes_parking_lots)
 
+        setListeners()
+    }
+
+    override fun onStart() {
+        super.onStart()
         getDataFromKonker()
     }
 
+    override fun onPause() {
+        super.onPause()
+        if (this::timer.isInitialized) {
+            timer.cancel()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (this::timer.isInitialized) {
+            timer.cancel()
+        }
+    }
+
+    private fun setListeners() {
+        reloadButton.setOnClickListener(this)
+    }
+
+    override fun onClick(view: View) {
+        val id = view.id
+
+        // If the reload button is clicked, reload the page
+        if (id == R.id.reloadButton) {
+            getDataFromKonker()
+        }
+    }
+
     private fun getDataFromKonker() {
+
+        runOnUiThread {
+            // Show progress bar and dismiss information
+            layoutProgressBar.visibility = View.VISIBLE
+            layoutNearInstitutesList.visibility = View.GONE
+            reloadButton.visibility = View.GONE
+        }
 
         // Initialize a shared preferences to get the token to access api
         sharedPreferences = this.getSharedPreferences("access-tokens", 0)
@@ -104,6 +140,22 @@ class NearInstitutesParkingLots : AppCompatActivity() {
             // Show information and dismiss the progress bar
             layoutProgressBar.visibility = View.GONE
             layoutNearInstitutesList.visibility = View.VISIBLE
+            reloadButton.visibility = View.VISIBLE
+        }
+        setTimer()
+    }
+
+    // Set the timer that will reload the page after 1 minute
+    private fun setTimer() {
+
+        // Always cancel the previous timer
+        if (this::timer.isInitialized) {
+            timer.cancel()
+        }
+
+        timer = Timer()
+        timer.schedule(10000) {
+            getDataFromKonker()
         }
     }
 }
