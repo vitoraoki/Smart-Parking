@@ -4,4 +4,10 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="mainColor">#006197</color>
+    <color name="secondColor">#0990D0</color>
+    <color name="thirdColor">#F79520</color>
+    <color name="text">#454B4E</color>
+    <color name="dialogTitle">#006197</color>
+    <color name="yesButton">#189742</color>
+    <color name="noButton">#8F1E26</color>
 </resources>

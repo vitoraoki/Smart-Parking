@@ -36,7 +36,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
         // Go to repetitive event activity
         else if (id == R.id.repetitiveEvents) {
-            Toast.makeText(this, "Em breve", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, RepetitiveEvent::class.java)
+            startActivity(intent)
         }
         // Go to list of events stored
         else if (id == R.id.listEvents) {

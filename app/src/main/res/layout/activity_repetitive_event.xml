@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Views.SingleEvent">
+    tools:context=".Views.RepetitiveEvent">
 
     <!-- Spinner to choose the event local   -->
     <LinearLayout
@@ -35,7 +35,7 @@
         android:orientation="horizontal">
 
         <Spinner
-            android:id="@+id/spinnerInstSingleEvent"
+            android:id="@+id/spinnerInstRepEvent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:spinnerMode="dropdown"
@@ -43,7 +43,7 @@
 
     </LinearLayout>
 
-    <!--  Button to choose the date of the event  -->
+    <!--  Spinner to choose the date of the event  -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,13 +69,12 @@
         android:paddingRight="10dp"
         android:paddingBottom="10dp">
 
-        <Button
-            android:id="@+id/datePickerSngEvent"
+        <Spinner
+            android:id="@+id/spinnerDaysWeek"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Selecione uma data"
-            android:textColor="#FFFFFF"
-            android:background="@color/secondColor"/>
+            android:spinnerMode="dropdown"
+            android:background="@drawable/spinner_border"/>
 
     </LinearLayout>
 
@@ -105,7 +104,7 @@
         android:paddingRight="10dp">
 
         <Button
-            android:id="@+id/timePickerSngEvent"
+            android:id="@+id/timePickerRtvEvent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Selecione um horário"
@@ -126,7 +125,7 @@
         android:paddingRight="10dp">
 
         <Button
-            android:id="@+id/sendButtonSngEvent"
+            android:id="@+id/sendButtonRtvEvent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Enviar"

@@ -8,8 +8,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.smartpark.Data.DatabaseHandler
-import com.example.smartpark.Utils.EventListAdapter
+import com.example.smartpark.Adapters.EventListAdapter
+import com.example.smartpark.Models.Event
 import com.example.smartpark.R
+import com.example.smartpark.Utils.EventsUtil
+import kotlinx.android.synthetic.main.access_event_dialog.*
 import kotlinx.android.synthetic.main.activity_list_events.*
 import kotlinx.android.synthetic.main.delete_event_dialog.*
 
@@ -19,8 +22,12 @@ class ListEvents : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_events)
 
-        showAllEvents(0)
         setListeners()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        showAllEvents(0)
     }
 
     private fun setListeners() {
@@ -71,10 +78,7 @@ class ListEvents : AppCompatActivity(), View.OnClickListener {
         eventsList.setOnItemClickListener { parent, view, position, id ->
             val event = eventAdapter.getItem(position)
             if (event != null) {
-                val intent = Intent(this, NearInstitutesParkingLots::class.java)
-                intent.putExtra("instituteId", event.getInstituteId())
-                startActivity(intent)
-//                deleteEvent(event.getEventId())
+                this.eventItemClick(event)
             }
         }
 
@@ -82,11 +86,45 @@ class ListEvents : AppCompatActivity(), View.OnClickListener {
         eventsList.setOnItemLongClickListener { parent, view, position, id ->
             val event = eventAdapter.getItem(position)
             if (event != null) {
-                eventItemLongClick(event.getEventId())
+                this.eventItemLongClick(event.getEventId())
             }
             true
         }
 
+    }
+
+    // Deal with the click in an event in list view
+    private fun eventItemClick(event: Event) {
+
+        // Inflate the dialog with the layout created for the dialog box
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.access_event_dialog, null)
+
+        // Build the alert dialog
+        val alertDialogBuilder = AlertDialog.Builder(this)
+            .setView(dialogView)
+
+        //Show the dialog
+        val alertDialog = alertDialogBuilder.show()
+
+        // Deal with confirmAccess button to access the event
+        alertDialog.confirmAccess.setOnClickListener {
+            val intent = Intent(this, NearInstitutesParkingLots::class.java)
+            intent.putExtra("instituteId", event.getInstituteId())
+            startActivity(intent)
+
+            // If the event is accessed it is deleted
+            val eventsUtil = EventsUtil(this)
+            eventsUtil.deleteEventFromDatabase(event.getEventId())
+
+            // Dismiss the alert dialog
+            alertDialog.dismiss()
+        }
+
+        // Deal with dismissAccess button to not access the notification
+        alertDialog.dismissAccess.setOnClickListener {
+            // Dismiss the alert dialog
+            alertDialog.dismiss()
+        }
     }
 
     // Delete an event selected by the user from the list of events
@@ -104,7 +142,14 @@ class ListEvents : AppCompatActivity(), View.OnClickListener {
 
         // Deal with confirmDelete button to delete the event
         alertDialog.confirmDelete.setOnClickListener {
-            deleteEvent(eventId)
+            val eventsUtil = EventsUtil(this)
+            val result = eventsUtil.deleteEventFromDatabase(eventId)
+
+            if(result == -1) {
+                Toast.makeText(this, "Erro ao deletar o evento", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Evento deletado com sucesso", Toast.LENGTH_SHORT).show()
+            }
 
             // Dismiss the alert dialog
             alertDialog.dismiss()
@@ -115,23 +160,6 @@ class ListEvents : AppCompatActivity(), View.OnClickListener {
             // Dismiss the alert dialog
             alertDialog.dismiss()
         }
-    }
-
-    // Delete the event from database
-    private fun deleteEvent(eventId: String) {
-
-        // Delete the notification from database
-        val dbHelper = DatabaseHandler(this)
-        val result = dbHelper.deleteEvent(eventId)
-
-        if(result == -1) {
-            Toast.makeText(this, "Erro ao deletar o evento", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(this, "Evento deletado com sucesso", Toast.LENGTH_SHORT).show()
-        }
-
-        // Reload the list of events
-        showAllEvents(0)
     }
 }
 

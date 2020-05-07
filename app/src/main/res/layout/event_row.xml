@@ -26,8 +26,9 @@
             android:layout_height="wrap_content"
             android:text="Data e hora da notificação"
             android:textSize="15sp"
-            android:layout_margin="5dp"
-            android:textColor="#595959"/>
+            android:layout_margin="5dp"/>
         
     </LinearLayout>
 </LinearLayout>
+
+<!--android:textColor="#595959"-->

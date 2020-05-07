@@ -1,6 +1,5 @@
-package com.example.smartpark.Utils
+package com.example.smartpark.Adapters
 
-import com.example.smartpark.Models.Event
 import android.content.Context
 import android.graphics.Color
 import android.util.TypedValue
@@ -47,9 +46,9 @@ class NearInstitutesListAdapter (
 
         // Put green when the institute parking lot has at least one parking lot
         if (institutesParkingLots.get(institute.getInstituteId()).toString().toInt() > 0) {
-            nearInstituteParkingLotsView.setTextColor(Color.parseColor("#FF00FF00"))
+            nearInstituteParkingLotsView.setTextColor(Color.parseColor("#098A00"))
         } else {
-            nearInstituteParkingLotsView.setTextColor(Color.parseColor("#FFFF0000"))
+            nearInstituteParkingLotsView.setTextColor(Color.parseColor("#B3000C"))
         }
 
         return view

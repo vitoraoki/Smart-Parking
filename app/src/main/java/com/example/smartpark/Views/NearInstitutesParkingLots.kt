@@ -3,14 +3,21 @@ package com.example.smartpark.Views
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.example.smartpark.Authorization.AccessTokenAuthenticator
 import com.example.smartpark.Authorization.AuthorizationInterceptor
 import com.example.smartpark.Authorization.AuthorizationRepository
 import com.example.smartpark.R
 import com.example.smartpark.Utils.DistanceUtil
-import com.example.smartpark.Utils.NearInstitutesListAdapter
+import com.example.smartpark.Adapters.NearInstitutesListAdapter
+import com.example.smartpark.Utils.EventsUtil
 import kotlinx.android.synthetic.main.activity_near_institutes_parking_lots.*
+import kotlinx.android.synthetic.main.delete_event_dialog.*
+import kotlinx.android.synthetic.main.delete_event_dialog.view.*
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
@@ -129,12 +136,13 @@ class NearInstitutesParkingLots : AppCompatActivity(), View.OnClickListener {
             // parking lots
 
             // Inflate the listView with all the near institutes
-            val nearInstitutesAdapter = NearInstitutesListAdapter(
-                this,
-                R.layout.near_institute_row,
-                listNearInstitutes,
-                institutesParkingLots
-            )
+            val nearInstitutesAdapter =
+                NearInstitutesListAdapter(
+                    this,
+                    R.layout.near_institute_row,
+                    listNearInstitutes,
+                    institutesParkingLots
+                )
             nearInstitutesList.adapter = nearInstitutesAdapter
 
             // Show information and dismiss the progress bar

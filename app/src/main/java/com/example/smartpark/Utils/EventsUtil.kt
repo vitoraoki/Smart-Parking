@@ -4,7 +4,7 @@ import android.content.Context
 import com.example.smartpark.Data.DatabaseHandler
 import com.example.smartpark.Models.Event
 
-class EventsSetter {
+class EventsUtil {
 
     private var context: Context
 
@@ -26,6 +26,16 @@ class EventsSetter {
         event.setTime(time)
         event.setRepetitive(repetitive)
         return dbHelper.insertEvent(event)
+    }
+
+    // Delete the event from database
+    fun deleteEventFromDatabase(eventId: String): Int {
+
+        // Delete the notification from database
+        val dbHelper = DatabaseHandler(context)
+        val result = dbHelper.deleteEvent(eventId)
+
+        return result
     }
 
 //    private lateinit var alarmManager : AlarmManager

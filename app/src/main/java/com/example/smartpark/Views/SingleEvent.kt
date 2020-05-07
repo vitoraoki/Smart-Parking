@@ -3,7 +3,6 @@ package com.example.smartpark.Views
 import android.app.*
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
@@ -12,7 +11,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.smartpark.Data.Institutes
-import com.example.smartpark.Utils.EventsSetter
+import com.example.smartpark.Utils.EventsUtil
 import com.example.smartpark.R
 import kotlinx.android.synthetic.main.activity_single_event.*
 import java.text.SimpleDateFormat
@@ -26,28 +25,28 @@ class SingleEvent : AppCompatActivity(), View.OnClickListener, DatePickerDialog.
     private val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
     private val simpleHourFormat = SimpleDateFormat("HH:mm")
 
-    private lateinit var event: EventsSetter
+    private lateinit var eventsUtil: EventsUtil
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_single_event)
 
-        event = EventsSetter(this)
+        eventsUtil = EventsUtil(this)
 
-        loadSpinnerInstitutes()
-        setListeners()
+        this.loadSpinnerInstitutes()
+        this.setListeners()
     }
 
     // Set all listeners
     private fun setListeners() {
-        sendButton.setOnClickListener(this)
-        datePicker.setOnClickListener(this)
-        timePicker.setOnClickListener(this)
+        sendButtonSngEvent.setOnClickListener(this)
+        datePickerSngEvent.setOnClickListener(this)
+        timePickerSngEvent.setOnClickListener(this)
     }
 
     // Load all values to put in the Spinner that show all institutes
     private fun loadSpinnerInstitutes() {
-        spinnerDynamic.adapter = ArrayAdapter(this,
+        spinnerInstSingleEvent.adapter = ArrayAdapter(this,
             android.R.layout.simple_spinner_dropdown_item,
             Institutes.getInstituteNamesList())
     }
@@ -58,21 +57,21 @@ class SingleEvent : AppCompatActivity(), View.OnClickListener, DatePickerDialog.
         val id = view.id
 
         // Deal with the click of the button "Enviar"
-        if (id == R.id.sendButton) {
+        if (id == R.id.sendButtonSngEvent) {
             val eventId = (System.currentTimeMillis() and 0xfffffff).toInt()
 
-            event.insertEventInDataBase(eventId.toString(),
-                spinnerDynamic.selectedItemPosition.toString(),
-                spinnerDynamic.selectedItem.toString(), date, time, 0)
+            eventsUtil.insertEventInDataBase(eventId.toString(),
+                spinnerInstSingleEvent.selectedItemPosition.toString(),
+                spinnerInstSingleEvent.selectedItem.toString(), date, time, 0)
             Toast.makeText(this, "Evento salvo", Toast.LENGTH_SHORT).show()
         }
         // Deal with the click of the button "Selecione uma data"
-        else if (id == R.id.datePicker) {
-            openDatePickerDialog()
+        else if (id == R.id.datePickerSngEvent) {
+            this.openDatePickerDialog()
         }
         // Deal with the click of the button "Selecione uma hora"
-        else if (id == R.id.timePicker) {
-            openTimePickerDialog()
+        else if (id == R.id.timePickerSngEvent) {
+            this.openTimePickerDialog()
         }
     }
 
@@ -92,7 +91,7 @@ class SingleEvent : AppCompatActivity(), View.OnClickListener, DatePickerDialog.
         val calendar = Calendar.getInstance()
         calendar.set(year, month, dayOfMonth)
         date = simpleDateFormat.format(calendar.time)
-        datePicker.text = date
+        datePickerSngEvent.text = date
     }
 
     // Open the dialog with the calendar to pick a time
@@ -112,6 +111,6 @@ class SingleEvent : AppCompatActivity(), View.OnClickListener, DatePickerDialog.
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         calendar.set(year, month, day, hourOfDay, minute)
         time = simpleHourFormat.format(calendar.time)
-        timePicker.text = time
+        timePickerSngEvent.text = time
     }
 }

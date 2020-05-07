@@ -12,8 +12,8 @@
         android:roundIcon="@drawable/smart_campus"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Views.NearInstitutesParkingLots"></activity>
-        <!-- android:usesCleartextTraffic="true"> -->
+        <activity android:name=".Views.RepetitiveEvent"></activity>
+        <activity android:name=".Views.NearInstitutesParkingLots" /> <!-- android:usesCleartextTraffic="true"> -->
         <activity android:name=".Views.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,15 +23,6 @@
         </activity>
         <activity android:name=".Views.ListEvents" />
         <activity android:name=".Views.SingleEvent" />
-
-<!--        <receiver-->
-<!--            android:name=".Broadcast.NotificationReceiver"-->
-<!--            android:enabled="true"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.BOOT_COMPLETED" />-->
-<!--            </intent-filter>-->
-<!--        </receiver>-->
     </application>
 
 </manifest>
