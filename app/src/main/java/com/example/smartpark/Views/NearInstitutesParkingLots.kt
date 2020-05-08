@@ -64,18 +64,17 @@ class NearInstitutesParkingLots : AppCompatActivity(), View.OnClickListener {
 
         // If the reload button is clicked, reload the page
         if (id == R.id.reloadButton) {
+
+            // Show progress bar and dismiss information
+            layoutProgressBar.visibility = View.VISIBLE
+            layoutNearInstitutesList.visibility = View.GONE
+            reloadButton.visibility = View.GONE
+
             getDataFromKonker()
         }
     }
 
     private fun getDataFromKonker() {
-
-        runOnUiThread {
-            // Show progress bar and dismiss information
-            layoutProgressBar.visibility = View.VISIBLE
-            layoutNearInstitutesList.visibility = View.GONE
-            reloadButton.visibility = View.GONE
-        }
 
         // Initialize a shared preferences to get the token to access api
         sharedPreferences = this.getSharedPreferences("access-tokens", 0)
