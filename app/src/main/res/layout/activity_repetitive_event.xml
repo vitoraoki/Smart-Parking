@@ -7,6 +7,45 @@
     android:layout_height="match_parent"
     tools:context=".Views.RepetitiveEvent">
 
+    <!-- Write a title for the event   -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Digite um título para o evento:"
+            android:textSize="20sp"
+            android:textColor="@color/text"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/rtvEventTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_border"
+            android:hint="Ex: Aula de cálculo 1"
+            android:textCursorDrawable="@drawable/cursor_color"
+            android:inputType="textCapSentences"
+            android:maxLength="256" />
+
+    </LinearLayout>
+
     <!-- Spinner to choose the event local   -->
     <LinearLayout
         android:layout_width="match_parent"

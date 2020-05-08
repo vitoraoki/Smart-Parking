@@ -13,13 +13,14 @@ class EventsUtil {
     }
 
     // Insert the new event in database
-    fun insertEventInDataBase(eventId: String, instituteId: String, instituteName: String,
+    fun insertEventInDataBase(eventId: String, eventTitle: String, instituteId: String, instituteName: String,
                                       date: String, time: String, repetitive: Int): Long {
         val dbHelper = DatabaseHandler(context)
         var event = Event()
 
         // Build the event that will be stored in database
         event.setEventId(eventId)
+        event.setEventTitle(eventTitle)
         event.setInstituteId(instituteId)
         event.setInstituteName(instituteName)
         event.setDate(date)

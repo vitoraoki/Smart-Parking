@@ -18,13 +18,15 @@ class EventListAdapter (
         val layoutInflater = LayoutInflater.from(mContext)
         val view = layoutInflater.inflate(resource, null)
 
+        val eventTitleView = view.findViewById<TextView>(R.id.eventTitle)
         val instituteNameView = view.findViewById<TextView>(R.id.instituteName)
         val dateAndTimeView = view.findViewById<TextView>(R.id.dateAndTime)
 
         var event = events.get(position)
-        instituteNameView.text = event.getInstituteName()
+        eventTitleView.text = event.getEventTitle()
+        instituteNameView.text = "Local: " + event.getInstituteName()
         dateAndTimeView.text = ""
-        dateAndTimeView.append(event.getDate() + " " + event.getTime())
+        dateAndTimeView.append(event.getDate() + " - " + event.getTime())
 
         return view
     }

@@ -4,12 +4,14 @@ import android.app.*
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.smartpark.Data.Institutes
 import com.example.smartpark.Utils.EventsUtil
 import com.example.smartpark.R
@@ -60,10 +62,35 @@ class SingleEvent : AppCompatActivity(), View.OnClickListener, DatePickerDialog.
         if (id == R.id.sendButtonSngEvent) {
             val eventId = (System.currentTimeMillis() and 0xfffffff).toInt()
 
-            eventsUtil.insertEventInDataBase(eventId.toString(),
-                spinnerInstSingleEvent.selectedItemPosition.toString(),
-                spinnerInstSingleEvent.selectedItem.toString(), date, time, 0)
-            Toast.makeText(this, "Evento salvo", Toast.LENGTH_SHORT).show()
+            // Verify if all the fields are filled
+            if (!sngEventTitle.text.isEmpty() && !date.isEmpty() && !time.isEmpty()) {
+                eventsUtil.insertEventInDataBase(
+                    eventId.toString(),
+                    sngEventTitle.text.toString(),
+                    spinnerInstSingleEvent.selectedItemPosition.toString(),
+                    spinnerInstSingleEvent.selectedItem.toString(),
+                    date,
+                    time,
+                    0)
+                Toast.makeText(this, "Evento salvo", Toast.LENGTH_SHORT).show()
+            } else {
+
+                var textError = "Favor completar os campos: "
+
+                if (sngEventTitle.text.isEmpty()) {
+                    textError += "título, "
+                }
+                if (date.isEmpty()) {
+                    textError += "data, "
+                }
+                if (time.isEmpty()) {
+                    textError += "horário, "
+                }
+
+                textError = textError.substring(0, textError.length - 2)
+                Toast.makeText(this, textError, Toast.LENGTH_LONG).show()
+            }
+
         }
         // Deal with the click of the button "Selecione uma data"
         else if (id == R.id.datePickerSngEvent) {

@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sim"
-            android:backgroundTint="@color/yesButton"
+            android:backgroundTint="@color/positive"
             android:textColor="#FFFFFF"/>
 
         <Button
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Não"
-            android:backgroundTint="@color/noButton"
+            android:backgroundTint="@color/negative"
             android:textColor="#FFFFFF"/>
 
     </LinearLayout>

@@ -1,14 +1,18 @@
 package com.example.smartpark.Views
 
+import android.app.Activity
 import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.TimePicker
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.smartpark.Data.Institutes
 import com.example.smartpark.R
+import com.example.smartpark.Utils.EventsUtil
 import kotlinx.android.synthetic.main.activity_repetitive_event.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -18,10 +22,13 @@ class RepetitiveEvent : AppCompatActivity(), View.OnClickListener,
 
     private var time = ""
     private val simpleHourFormat = SimpleDateFormat("HH:mm")
+    private lateinit var eventsUtil: EventsUtil
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repetitive_event)
+
+        eventsUtil = EventsUtil(this)
 
         this.loadSpinnerInstitutes()
         this.loadSpinnerDaysOfWeek()
@@ -58,7 +65,34 @@ class RepetitiveEvent : AppCompatActivity(), View.OnClickListener,
         // Deal with the click of the button "Enviar"
         if (id == R.id.sendButtonRtvEvent) {
             val eventId = (System.currentTimeMillis() and 0xfffffff).toInt()
-            Toast.makeText(this, "Evento salvo", Toast.LENGTH_SHORT).show()
+
+            // Verify if all the fields are filled
+            if (!rtvEventTitle.text.isEmpty() && !time.isEmpty()) {
+                eventsUtil.insertEventInDataBase(
+                    eventId.toString(),
+                    rtvEventTitle.text.toString(),
+                    spinnerInstRepEvent.selectedItemPosition.toString(),
+                    spinnerInstRepEvent.selectedItem.toString(),
+                    spinnerDaysWeek.selectedItem.toString(),
+                    time,
+                    1)
+
+                Toast.makeText(this, "Evento salvo", Toast.LENGTH_SHORT).show()
+            } else {
+
+                var textError = "Favor completar os campos: "
+
+                if (rtvEventTitle.text.isEmpty()) {
+                    textError += "título, "
+                }
+                if (time.isEmpty()) {
+                    textError += "horário, "
+                }
+
+                textError = textError.substring(0, textError.length - 2)
+                Toast.makeText(this, textError, Toast.LENGTH_LONG).show()
+            }
+
         }
         // Deal with the click of the button "Selecione uma hora"
         else if (id == R.id.timePickerRtvEvent) {

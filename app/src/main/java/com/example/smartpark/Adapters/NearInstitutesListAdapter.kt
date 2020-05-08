@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.example.smartpark.Models.Institute
 import com.example.smartpark.R
 import org.json.JSONObject
@@ -46,9 +47,9 @@ class NearInstitutesListAdapter (
 
         // Put green when the institute parking lot has at least one parking lot
         if (institutesParkingLots.get(institute.getInstituteId()).toString().toInt() > 0) {
-            nearInstituteParkingLotsView.setTextColor(Color.parseColor("#098A00"))
+            nearInstituteParkingLotsView.setTextColor(ContextCompat.getColor(mContext, R.color.positive))
         } else {
-            nearInstituteParkingLotsView.setTextColor(Color.parseColor("#B3000C"))
+            nearInstituteParkingLotsView.setTextColor(ContextCompat.getColor(mContext, R.color.negative))
         }
 
         return view

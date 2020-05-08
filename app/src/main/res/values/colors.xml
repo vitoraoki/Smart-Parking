@@ -8,6 +8,6 @@
     <color name="thirdColor">#F79520</color>
     <color name="text">#454B4E</color>
     <color name="dialogTitle">#006197</color>
-    <color name="yesButton">#189742</color>
-    <color name="noButton">#8F1E26</color>
+    <color name="positive">#098A00</color>
+    <color name="negative">#B3000C</color>
 </resources>

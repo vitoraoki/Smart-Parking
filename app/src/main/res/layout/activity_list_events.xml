@@ -10,55 +10,32 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="5dp">
-
-        <TextView
-            android:id="@+id/singleEventList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/list_toggle_single_event"
-            android:textSize="16sp"
-            android:visibility="gone"
-            android:textColor="@color/text"/>
-
-        <TextView
-            android:id="@+id/repetitiveEventList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/list_toggle_repetitive_event"
-            android:textSize="16sp"
-            android:textColor="@color/text"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp">
+        android:orientation="horizontal"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="5dp"
+        android:weightSum="2">
 
         <Button
             android:id="@+id/btnToggleSingle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/btnToggleSingle"
-            android:visibility="gone"
-            android:background="@color/thirdColor"
-            android:textColor="#FFFFFF"/>
+            android:visibility="visible"
+            android:background="?android:attr/selectableItemBackground"
+            style="?android:attr/borderlessButtonStyle"
+            android:textColor="@color/thirdColor"
+            android:layout_weight="1"/>
 
         <Button
             android:id="@+id/btnToggleRepetitive"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/btnToggleRepetitive"
-            android:background="@color/thirdColor"
-            android:textColor="#FFFFFF"/>
+            android:background="@drawable/btn_list_event_rpt_bottom_left"
+            style="?android:attr/borderlessButtonStyle"
+            android:textColor="#FFFFFF"
+            android:layout_weight="1"/>
 
     </LinearLayout>
 

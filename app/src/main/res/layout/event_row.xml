@@ -11,12 +11,21 @@
         android:orientation="vertical">
         
         <TextView
+            android:id="@+id/eventTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Titulo do evento"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_margin="5dp"
+            android:textColor="#000"/>
+
+        <TextView
             android:id="@+id/instituteName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nome do instituto"
-            android:textStyle="bold"
-            android:textSize="18sp"
+            android:text="Local do evento"
+            android:textSize="15sp"
             android:layout_margin="5dp"
             android:textColor="#000"/>
 

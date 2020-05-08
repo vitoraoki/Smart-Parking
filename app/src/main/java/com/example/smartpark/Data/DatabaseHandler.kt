@@ -10,6 +10,7 @@ val DATABASE_NAME = "SmartPark"
 val TABLE_NAME = "Events"
 val COL_ID = "id"
 val COL_EVENT_ID = "eventId"
+val COL_EVENT_TITLE = "eventTitle"
 val COL_INSTITUTE_ID = "instituteId"
 val COL_INSTITUTE_NAME = "instituteName"
 val COL_DATE = "date"
@@ -22,6 +23,7 @@ class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
                 TABLE_NAME + " (" +
                 COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COL_EVENT_ID + " VARCHAR(256)," +
+                COL_EVENT_TITLE + " VARCHAR(256)," +
                 COL_INSTITUTE_ID + " VARCHAR(256)," +
                 COL_INSTITUTE_NAME + " VARCHAR(256)," +
                 COL_DATE + " VARCHAR(256)," +
@@ -41,6 +43,7 @@ class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
         var cv = ContentValues()
 
         cv.put(COL_EVENT_ID, event.getEventId())
+        cv.put(COL_EVENT_TITLE, event.getEventTitle())
         cv.put(COL_INSTITUTE_ID, event.getInstituteId())
         cv.put(COL_INSTITUTE_NAME, event.getInstituteName())
         cv.put(COL_DATE, event.getDate())
@@ -68,6 +71,7 @@ class DatabaseHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE
                 event.setId(result.getString(result.getColumnIndex(COL_ID)).toInt())
                 event.setEventId(result.getString(result.getColumnIndex(
                     COL_EVENT_ID)))
+                event.setEventTitle(result.getString(result.getColumnIndex(COL_EVENT_TITLE)))
                 event.setInstituteId(result.getString(result.getColumnIndex(COL_INSTITUTE_ID)))
                 event.setInstituteName(result.getString(result.getColumnIndex(
                     COL_INSTITUTE_NAME)))
