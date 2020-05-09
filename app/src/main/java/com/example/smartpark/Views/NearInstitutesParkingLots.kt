@@ -1,5 +1,6 @@
 package com.example.smartpark.Views
 
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -143,6 +144,16 @@ class NearInstitutesParkingLots : AppCompatActivity(), View.OnClickListener {
                     institutesParkingLots
                 )
             nearInstitutesList.adapter = nearInstitutesAdapter
+
+            nearInstitutesList.setOnItemClickListener { parent, view, position, id ->
+                val institute = nearInstitutesAdapter.getItem(position)
+                if (institute != null) {
+                    val intent = Intent(this, MapsActivity::class.java)
+                    intent.putExtra("targetInstituteId", this.intent.getStringExtra("instituteId"))
+                    intent.putExtra("nearInstituteId", institute.getInstituteId())
+                    startActivity(intent)
+                }
+            }
 
             // Show information and dismiss the progress bar
             layoutProgressBar.visibility = View.GONE

@@ -1,23 +1,24 @@
 package com.example.smartpark.Views
 
-import android.app.*
+import android.app.Activity
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.ArrayAdapter
-import android.widget.DatePicker
-import android.widget.TimePicker
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.example.smartpark.Data.Institutes
-import com.example.smartpark.Utils.EventsUtil
 import com.example.smartpark.R
+import com.example.smartpark.Utils.EventsUtil
 import kotlinx.android.synthetic.main.activity_single_event.*
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class SingleEvent : AppCompatActivity(), View.OnClickListener, DatePickerDialog.OnDateSetListener,
     TimePickerDialog.OnTimeSetListener {
@@ -39,11 +40,10 @@ class SingleEvent : AppCompatActivity(), View.OnClickListener, DatePickerDialog.
         this.setListeners()
     }
 
-    // Set all listeners
-    private fun setListeners() {
-        sendButtonSngEvent.setOnClickListener(this)
-        datePickerSngEvent.setOnClickListener(this)
-        timePickerSngEvent.setOnClickListener(this)
+    // Function to hide keyboard
+    fun hideKeyboard(v: View) {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(v.windowToken, 0)
     }
 
     // Load all values to put in the Spinner that show all institutes
@@ -53,10 +53,30 @@ class SingleEvent : AppCompatActivity(), View.OnClickListener, DatePickerDialog.
             Institutes.getInstituteNamesList())
     }
 
+    // Set all listeners
+    private fun setListeners() {
+        sendButtonSngEvent.setOnClickListener(this)
+        datePickerSngEvent.setOnClickListener(this)
+        timePickerSngEvent.setOnClickListener(this)
+
+        // Hide keyboard when spinner is touched
+        spinnerInstSingleEvent.setOnTouchListener { v, event ->
+            this.hideKeyboard(v)
+            false
+        }
+
+        // Hide keyboard when layout is touched
+        sngEventLayout.setOnTouchListener { v, event ->
+            this.hideKeyboard(v)
+            true
+        }
+    }
+
     // Deal with all the button click events
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onClick(view: View) {
         val id = view.id
+        this.hideKeyboard(view)
 
         // Deal with the click of the button "Enviar"
         if (id == R.id.sendButtonSngEvent) {

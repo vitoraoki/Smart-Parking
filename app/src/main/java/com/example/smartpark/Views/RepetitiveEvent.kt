@@ -1,7 +1,7 @@
 package com.example.smartpark.Views
 
-import android.app.Activity
 import android.app.TimePickerDialog
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,7 +9,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.TimePicker
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import com.example.smartpark.Data.Institutes
 import com.example.smartpark.R
 import com.example.smartpark.Utils.EventsUtil
@@ -35,6 +34,12 @@ class RepetitiveEvent : AppCompatActivity(), View.OnClickListener,
         this.setListeners()
     }
 
+    // Function to hide keyboard
+    fun hideKeyboard(v: View) {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(v.windowToken, 0)
+    }
+
     // Load all values to put in the Spinner that show all institutes
     private fun loadSpinnerInstitutes() {
         spinnerInstRepEvent.adapter = ArrayAdapter(this,
@@ -57,10 +62,27 @@ class RepetitiveEvent : AppCompatActivity(), View.OnClickListener,
     private fun setListeners() {
         sendButtonRtvEvent.setOnClickListener(this)
         timePickerRtvEvent.setOnClickListener(this)
+
+        // Hide keyboard when spinner is touched
+        spinnerInstRepEvent.setOnTouchListener { v, event ->
+            this.hideKeyboard(v)
+            false
+        }
+        spinnerDaysWeek.setOnTouchListener { v, event ->
+            this.hideKeyboard(v)
+            false
+        }
+
+        // Hide keyboard when layout is touched
+        rtvEventLayout.setOnTouchListener { v, event ->
+            this.hideKeyboard(v)
+            true
+        }
     }
 
     override fun onClick(view: View) {
         val id = view.id
+        this.hideKeyboard(view)
 
         // Deal with the click of the button "Enviar"
         if (id == R.id.sendButtonRtvEvent) {

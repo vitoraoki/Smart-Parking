@@ -46,7 +46,7 @@
         android:clickable="true"
         android:focusable="true"
         android:layout_margin="20dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:backgroundTint="@color/mainColor"
         app:borderWidth="0dp"
         app:srcCompat="@android:drawable/ic_popup_sync" />
