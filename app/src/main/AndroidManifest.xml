@@ -31,18 +31,31 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".Views.MapsActivity"/>
-        <activity android:name=".Views.RepetitiveEvent" />
-        <activity android:name=".Views.NearInstitutesParkingLots" /> <!-- android:usesCleartextTraffic="true"> -->
-        <activity android:name=".Views.MainActivity">
+        <activity android:name=".Views.MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Views.ListEvents" />
-        <activity android:name=".Views.SingleEvent" />
+
+        <activity android:name=".Views.SingleEvent"
+            android:parentActivityName=".Views.MainActivity"/>
+
+        <activity android:name=".Views.RepetitiveEvent"
+            android:parentActivityName=".Views.MainActivity"/>
+
+        <activity android:name=".Views.ListEvents"
+            android:parentActivityName=".Views.MainActivity"
+            android:launchMode="singleTop"/>
+
+        <activity android:name=".Views.NearInstitutesParkingLots"
+            android:parentActivityName=".Views.ListEvents"
+            android:launchMode="singleTop"/>
+
+        <activity android:name=".Views.MapsActivity"
+            android:parentActivityName=".Views.NearInstitutesParkingLots"/>
+
     </application>
 
 </manifest>

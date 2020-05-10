@@ -1,17 +1,14 @@
 package com.example.smartpark.Views
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Paint
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.example.smartpark.Data.DatabaseHandler
@@ -26,13 +23,16 @@ import kotlinx.android.synthetic.main.delete_event_dialog.*
 
 class ListEvents : AppCompatActivity(), View.OnClickListener {
 
-    private var repetitive = 0
+    private var repetitive = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layout.activity_list_events)
 
         setListeners()
+
+        // Show the back button in toolbar
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onStart() {
@@ -41,19 +41,39 @@ class ListEvents : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setListeners() {
-        btnToggleSingle.setOnClickListener(this)
         btnToggleRepetitive.setOnClickListener(this)
-        btnToggleSingle.isClickable = false
-        btnToggleSingle.paintFlags = Paint.UNDERLINE_TEXT_FLAG
-        btnToggleRepetitive.isClickable = true
+        btnToggleRepetitive.isClickable = false
+        btnToggleRepetitive.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+
+        btnToggleSingle.setOnClickListener(this)
+        btnToggleSingle.isClickable = true
     }
 
     override fun onClick(view: View) {
         val id = view.id
         val typedValue = TypedValue()
 
+        // Show the repetitive events
+        if (id == R.id.btnToggleRepetitive) {
+            repetitive = 1
+            showAllEvents(repetitive)
+
+            theme.resolveAttribute(attr.selectableItemBackground, typedValue, true)
+
+            btnToggleRepetitive.background = ContextCompat.getDrawable(this, typedValue.resourceId)
+            btnToggleRepetitive.setTextColor(ContextCompat.getColor(this, color.thirdColor))
+            titleListRepetitive.visibility = View.VISIBLE
+            btnToggleRepetitive.isClickable = false
+            btnToggleRepetitive.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+
+            btnToggleSingle.background = ContextCompat.getDrawable(this, drawable.btn_list_event_bottom_left)
+            btnToggleSingle.setTextColor(Color.parseColor("#FFFFFF"))
+            titleListSingle.visibility = View.GONE
+            btnToggleSingle.isClickable = true
+            btnToggleSingle.paintFlags -= Paint.UNDERLINE_TEXT_FLAG
+        }
         // Show the single events
-        if (id == R.id.btnToggleSingle) {
+        else if (id == R.id.btnToggleSingle) {
             repetitive = 0
             showAllEvents(repetitive)
 
@@ -61,33 +81,15 @@ class ListEvents : AppCompatActivity(), View.OnClickListener {
 
             btnToggleSingle.background = ContextCompat.getDrawable(this, typedValue.resourceId)
             btnToggleSingle.setTextColor(ContextCompat.getColor(this, color.thirdColor))
-            btnToggleRepetitive.background = ContextCompat.getDrawable(this, drawable.btn_list_event_rpt_bottom_left)
-            btnToggleRepetitive.setTextColor(Color.parseColor("#FFFFFF"))
             titleListSingle.visibility = View.VISIBLE
-            titleListRepetitive.visibility = View.GONE
             btnToggleSingle.isClickable = false
-            btnToggleRepetitive.isClickable = true
             btnToggleSingle.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+
+            btnToggleRepetitive.background = ContextCompat.getDrawable(this, drawable.btn_list_event_bottom_right)
+            btnToggleRepetitive.setTextColor(Color.parseColor("#FFFFFF"))
+            titleListRepetitive.visibility = View.GONE
+            btnToggleRepetitive.isClickable = true
             btnToggleRepetitive.paintFlags -= Paint.UNDERLINE_TEXT_FLAG
-
-        }
-        // Show the repetitive events
-        else if (id == R.id.btnToggleRepetitive) {
-            repetitive = 1
-            showAllEvents(repetitive)
-
-            theme.resolveAttribute(attr.selectableItemBackground, typedValue, true)
-
-            btnToggleSingle.background = ContextCompat.getDrawable(this, drawable.btn_list_event_sng_bottom_right)
-            btnToggleSingle.setTextColor(Color.parseColor("#FFFFFF"))
-            btnToggleRepetitive.background = ContextCompat.getDrawable(this, typedValue.resourceId)
-            btnToggleRepetitive.setTextColor(ContextCompat.getColor(this, color.thirdColor))
-            titleListSingle.visibility = View.GONE
-            titleListRepetitive.visibility = View.VISIBLE
-            btnToggleSingle.isClickable = true
-            btnToggleRepetitive.isClickable = false
-            btnToggleSingle.paintFlags -= Paint.UNDERLINE_TEXT_FLAG
-            btnToggleRepetitive.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         }
     }
 

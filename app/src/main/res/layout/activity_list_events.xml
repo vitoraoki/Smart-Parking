@@ -17,22 +17,21 @@
         android:weightSum="2">
 
         <Button
-            android:id="@+id/btnToggleSingle"
+            android:id="@+id/btnToggleRepetitive"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btnToggleSingle"
-            android:visibility="visible"
+            android:text="@string/btnToggleRepetitive"
             android:background="?android:attr/selectableItemBackground"
             style="?android:attr/borderlessButtonStyle"
             android:textColor="@color/thirdColor"
             android:layout_weight="1"/>
 
         <Button
-            android:id="@+id/btnToggleRepetitive"
+            android:id="@+id/btnToggleSingle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btnToggleRepetitive"
-            android:background="@drawable/btn_list_event_rpt_bottom_left"
+            android:text="@string/btnToggleSingle"
+            android:background="@drawable/btn_list_event_bottom_left"
             style="?android:attr/borderlessButtonStyle"
             android:textColor="#FFFFFF"
             android:layout_weight="1"/>
@@ -48,18 +47,18 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/titleListSingle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/list_single_event"
-            android:textSize="16sp"
-            android:textColor="@color/text"/>
-
-        <TextView
             android:id="@+id/titleListRepetitive"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/list_repetitive_event"
+            android:textSize="16sp"
+            android:textColor="@color/text"/>
+
+        <TextView
+            android:id="@+id/titleListSingle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/list_single_event"
             android:textSize="16sp"
             android:visibility="gone"
             android:textColor="@color/text"/>

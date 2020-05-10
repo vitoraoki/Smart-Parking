@@ -32,6 +32,9 @@ class RepetitiveEvent : AppCompatActivity(), View.OnClickListener,
         this.loadSpinnerInstitutes()
         this.loadSpinnerDaysOfWeek()
         this.setListeners()
+
+        // Show the back button in toolbar
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     // Function to hide keyboard

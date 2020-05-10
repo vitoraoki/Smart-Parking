@@ -36,6 +36,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Get the list of institutes
         listInstitutes = Institutes.getInstitutesList()
+
+        // Show the back button in toolbar
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     /**

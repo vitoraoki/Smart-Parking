@@ -35,6 +35,9 @@ class NearInstitutesParkingLots : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_near_institutes_parking_lots)
 
         setListeners()
+
+        // Show the back button in toolbar
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onStart() {
@@ -70,6 +73,7 @@ class NearInstitutesParkingLots : AppCompatActivity(), View.OnClickListener {
             layoutProgressBar.visibility = View.VISIBLE
             layoutNearInstitutesList.visibility = View.GONE
             reloadButton.visibility = View.GONE
+            errorRequest.visibility = View.GONE
 
             getDataFromKonker()
         }
@@ -99,7 +103,14 @@ class NearInstitutesParkingLots : AppCompatActivity(), View.OnClickListener {
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                val text = "Erro ao obter os dados de vagas nos estacionamentos"
+
+                // If an error occur, ask to reload the page
+                runOnUiThread {
+                    errorRequest.visibility = View.VISIBLE
+                    reloadButton.visibility = View.VISIBLE
+                    layoutProgressBar.visibility = View.GONE
+                    layoutNearInstitutesList.visibility = View.GONE
+                }
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -159,6 +170,7 @@ class NearInstitutesParkingLots : AppCompatActivity(), View.OnClickListener {
             layoutProgressBar.visibility = View.GONE
             layoutNearInstitutesList.visibility = View.VISIBLE
             reloadButton.visibility = View.VISIBLE
+            errorRequest.visibility = View.GONE
         }
         setTimer()
     }

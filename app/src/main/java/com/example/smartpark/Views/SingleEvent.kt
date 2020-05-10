@@ -38,6 +38,9 @@ class SingleEvent : AppCompatActivity(), View.OnClickListener, DatePickerDialog.
 
         this.loadSpinnerInstitutes()
         this.setListeners()
+
+        // Show the back button in toolbar
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     // Function to hide keyboard

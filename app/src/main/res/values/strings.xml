@@ -45,4 +45,7 @@
         Eventos repetitivos
     </string>
     <string name="title_activity_maps">Map</string>
+
+    <!-- Error request -->
+    <string name="error_request">Erro ao carregar os dados. Por favor, recarregue a página</string>
 </resources>
