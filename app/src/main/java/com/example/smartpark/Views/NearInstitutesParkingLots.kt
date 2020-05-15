@@ -160,6 +160,7 @@ class NearInstitutesParkingLots : AppCompatActivity(), View.OnClickListener {
                 val institute = nearInstitutesAdapter.getItem(position)
                 if (institute != null) {
                     val intent = Intent(this, MapsActivity::class.java)
+                    intent.putExtra("activityParent", "1") // 0 : NearInstitutesParkingLots
                     intent.putExtra("targetInstituteId", this.intent.getStringExtra("instituteId"))
                     intent.putExtra("nearInstituteId", institute.getInstituteId())
                     startActivity(intent)

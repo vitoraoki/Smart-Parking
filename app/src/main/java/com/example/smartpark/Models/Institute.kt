@@ -6,14 +6,21 @@ class Institute {
     private var instituteName = ""
     private var latitude = 0.0
     private var longitude = 0.0
+    private var street = ""
+    private var number = ""
+    private var postCode = ""
     private var distance = 0.0 // Distance calculated to a target institute
 
     constructor()
-    constructor(instituteId: String, instituteName: String, latitude: Double, longitude: Double) {
+    constructor(instituteId: String, instituteName: String, latitude: Double, longitude: Double,
+                street: String, number: String, postCode: String) {
         this.instituteId = instituteId
         this.instituteName = instituteName
         this.latitude = latitude
         this.longitude = longitude
+        this.street = street
+        this.number = number
+        this.postCode = postCode
     }
 
     fun getInstituteId(): String {
@@ -30,6 +37,30 @@ class Institute {
 
     fun setInstituteName(instituteName: String) {
         this.instituteName = instituteName
+    }
+
+    fun getStreet(): String {
+        return this.street
+    }
+
+    fun setStreet(street: String) {
+        this.street = street
+    }
+
+    fun getNumber(): String {
+        return this.number
+    }
+
+    fun setNumber(number: String) {
+        this.number = number
+    }
+
+    fun getPostCode(): String {
+        return this.postCode
+    }
+
+    fun setPostCode(postCode: String) {
+        this.postCode = postCode
     }
 
     fun getLatitude(): Double {

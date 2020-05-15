@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         singleEvent.setOnClickListener(this)
         repetitiveEvents.setOnClickListener(this)
         listEvents.setOnClickListener(this)
+        instituteConsult.setOnClickListener(this)
     }
 
     override fun onClick(view: View) {
@@ -42,6 +43,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         // Go to list of events stored
         else if (id == R.id.listEvents) {
             val intent = Intent(this, ListEvents::class.java)
+            startActivity(intent)
+        }
+        // Consult institute data
+        else if (id == R.id.instituteConsult) {
+            val intent = Intent(this, ConsultInstitute::class.java)
             startActivity(intent)
         }
     }

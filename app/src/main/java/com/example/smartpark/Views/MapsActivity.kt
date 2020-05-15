@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import com.example.smartpark.Data.Institutes
 import com.example.smartpark.Models.Institute
 import com.example.smartpark.R
+import com.example.smartpark.Utils.DistanceUtil
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -52,6 +53,47 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        // Verify which activity calls a map
+        if (intent.getStringExtra("activityParent").toInt() == 0) {
+            this.mapNearInstitutesConsult(googleMap)
+        } else if (intent.getStringExtra("activityParent").toInt() == 1) {
+            this.mapNearInstitutesEvent(googleMap)
+        }
+    }
+
+    // Load map for the near institutes consult
+    private fun mapNearInstitutesConsult(mMap: GoogleMap) {
+
+        // Get the list of near institutes
+        val listNearInstitutesParkingLots =
+            DistanceUtil.getNearInstitutes(intent.getStringExtra("targetInstituteId").toInt())
+
+        // Add a marker to the target institute
+        val targetInstitute = listInstitutes.get(
+            intent.getStringExtra("targetInstituteId").toInt())
+        val targetPos = LatLng(targetInstitute.getLatitude(), targetInstitute.getLongitude())
+        mMap.addMarker(MarkerOptions()
+            .position(targetPos)
+            .title(targetInstitute.getInstituteName())
+            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
+
+        // For each near institute add a marker on the map
+        for (institute in listNearInstitutesParkingLots) {
+            // Do not add the institute target
+            if (!institute.getInstituteId().equals(intent.getStringExtra("targetInstituteId"))) {
+                val nearInstitutePos = LatLng(institute.getLatitude(), institute.getLongitude())
+                mMap.addMarker(MarkerOptions()
+                    .position(nearInstitutePos)
+                    .title(institute.getInstituteName())
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+            }
+        }
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(targetPos, 15F))
+    }
+
+    // Load map for the near institutes events list
+    private fun mapNearInstitutesEvent(mMap: GoogleMap) {
 
         // Add a marker to the target institute
         val targetInstitute = listInstitutes.get(
@@ -87,14 +129,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             // Inflate the dialog with the layout created for the dialog box
             val dialogView = LayoutInflater.from(this).inflate(R.layout.info_maps_dialog, null)
 
-            // Put the name of institutes to show which on the marker represent
-            val targetInstitute = listInstitutes.get(
-                intent.getStringExtra("targetInstituteId").toInt())
-            val nearInstitute = listInstitutes.get(
-                intent.getStringExtra("nearInstituteId").toInt())
-
-            dialogView.targetInstName.text = targetInstitute.getInstituteName()
-            dialogView.nearInstName.text = nearInstitute.getInstituteName()
+            dialogView.targetInstName.text = "Destino"
+            dialogView.nearInstName.text = "Instituto Próximo"
 
             // Build the alert dialog
             val alertDialogBuilder = AlertDialog.Builder(this)
