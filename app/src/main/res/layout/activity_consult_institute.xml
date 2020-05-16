@@ -95,10 +95,12 @@
 
         <!-- Institute name and logo -->
         <LinearLayout
+            android:id="@+id/layoutNameAndLogo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingTop="20dp">
+            android:paddingTop="20dp"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -110,7 +112,7 @@
                     android:id="@+id/instituteLogo"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/ic"/>
+                    android:src="@drawable/logo13"/>
 
             </LinearLayout>
 
@@ -141,9 +143,11 @@
 
         <!-- Institute data -->
         <LinearLayout
+            android:id="@+id/layoutData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <!-- Institute street -->
             <LinearLayout
@@ -162,7 +166,7 @@
                     android:textStyle="bold"/>
 
                 <TextView
-                    android:id="@+id/instituteId"
+                    android:id="@+id/instituteStreet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Albert Einstein"
@@ -258,7 +262,8 @@
                     android:layout_height="wrap_content"
                     android:text="Ver mapa"
                     android:textColor="#FFFFFF"
-                    android:background="@color/secondColor"/>
+                    android:background="@color/secondColor"
+                    android:clickable="false"/>
 
             </LinearLayout>
 

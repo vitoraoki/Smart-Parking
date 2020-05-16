@@ -42,6 +42,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
+    // Deal with the back button
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
