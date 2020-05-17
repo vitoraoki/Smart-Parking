@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/info_maps"
+        android:id="@+id/info_menu"
         android:icon="@drawable/ic_info_outline"
         app:showAsAction="ifRoom"
         android:title="Info" />

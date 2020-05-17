@@ -4,10 +4,14 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.example.smartpark.Authorization.AccessTokenAuthenticator
 import com.example.smartpark.Authorization.AuthorizationInterceptor
 import com.example.smartpark.Authorization.AuthorizationRepository
@@ -15,7 +19,7 @@ import com.example.smartpark.Data.Institutes
 import com.example.smartpark.R
 import com.google.android.gms.common.server.response.FastJsonResponse
 import kotlinx.android.synthetic.main.activity_consult_institute.*
-import kotlinx.android.synthetic.main.activity_near_institutes_parking_lots.*
+import kotlinx.android.synthetic.main.info_maps_dialog.view.*
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
@@ -59,6 +63,7 @@ class ConsultInstitute : AppCompatActivity(), View.OnClickListener {
 
             // Change the visibility of the layouts to show the progress bar and make the button
             // to see the map, not clickable
+            errorRequestConsult.visibility = View.GONE
             layoutProgressBarConsult.visibility = View.VISIBLE
             layoutNameAndLogo.visibility = View.GONE
             layoutData.visibility = View.GONE
@@ -103,10 +108,11 @@ class ConsultInstitute : AppCompatActivity(), View.OnClickListener {
 
                 // If an error occur, ask to reload the page
                 runOnUiThread {
-                    errorRequest.visibility = View.VISIBLE
-                    reloadButton.visibility = View.VISIBLE
-                    layoutProgressBar.visibility = View.GONE
-                    layoutNearInstitutesList.visibility = View.GONE
+                    errorRequestConsult.visibility = View.VISIBLE
+                    layoutProgressBarConsult.visibility = View.GONE
+                    layoutNameAndLogo.visibility = View.GONE
+                    layoutData.visibility = View.GONE
+                    nearInstitutesMap.isClickable = false
                 }
             }
 
@@ -148,11 +154,39 @@ class ConsultInstitute : AppCompatActivity(), View.OnClickListener {
         // Change the visibility of the layouts to show the data and make the button to see the map
         // clickable
         runOnUiThread {
+            errorRequestConsult.visibility = View.GONE
             layoutProgressBarConsult.visibility = View.GONE
             layoutNameAndLogo.visibility = View.VISIBLE
             layoutData.visibility = View.VISIBLE
             nearInstitutesMap.isClickable = true
         }
+    }
+
+    // Show info button on top bar
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.info_menu, menu)
+        return true
+    }
+
+    // Deal with the click on the info button
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+
+        if (id == R.id.info_menu) {
+            // Inflate the dialog with the layout created for the dialog box
+            val dialogView = LayoutInflater
+                .from(this)
+                .inflate(R.layout.info_consult_institute, null)
+
+            // Build the alert dialog
+            val alertDialogBuilder = AlertDialog.Builder(this)
+                .setView(dialogView)
+
+            //Show the dialog
+            alertDialogBuilder.show()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

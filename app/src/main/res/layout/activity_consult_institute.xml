@@ -93,6 +93,39 @@
 
         </LinearLayout>
 
+        <!-- Error page -->
+        <RelativeLayout
+            android:id="@+id/errorRequestConsult"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerInParent="true">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:text="@string/error_request"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_error_outline"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
         <!-- Institute name and logo -->
         <LinearLayout
             android:id="@+id/layoutNameAndLogo"

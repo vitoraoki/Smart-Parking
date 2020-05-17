@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rtvEventLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Views.RepetitiveEvent"
@@ -11,170 +10,176 @@
     android:focusable="true"
     android:focusableInTouchMode="true">
 
-    <!-- Write a title for the event   -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="5dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
+        <!-- Write a title for the event   -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Digite um título para o evento:"
-            android:textSize="20sp"
-            android:textColor="@color/text"/>
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Digite um título para o evento:"
+                android:textSize="20sp"
+                android:textColor="@color/text"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:orientation="horizontal">
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/rtvEventTitle"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_border"
-            android:hint="Ex: Aula de cálculo 1"
-            android:textCursorDrawable="@drawable/cursor_color"
-            android:inputType="textCapSentences"
-            android:maxLength="256" />
+            android:paddingTop="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/rtvEventTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_border"
+                android:hint="Ex: Aula de cálculo 1"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:inputType="textCapSentences"
+                android:maxLength="256" />
 
-    <!-- Spinner to choose the event local   -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="5dp">
+        </LinearLayout>
 
-        <TextView
+        <!-- Spinner to choose the event local   -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Selecione o instituto de destino:"
-            android:textSize="20sp"
-            android:textColor="@color/text"/>
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selecione o instituto de destino:"
+                android:textSize="20sp"
+                android:textColor="@color/text"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:orientation="horizontal">
+        </LinearLayout>
 
-        <Spinner
-            android:id="@+id/spinnerInstRepEvent"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:spinnerMode="dropdown"
-            android:background="@drawable/spinner_border"/>
+            android:paddingTop="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <Spinner
+                android:id="@+id/spinnerInstRepEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
+                android:background="@drawable/spinner_border"/>
 
-    <!--  Spinner to choose the date of the event  -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="5dp">
+        </LinearLayout>
 
-        <TextView
+        <!--  Spinner to choose the date of the event  -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Selecione a data do evento:"
-            android:textSize="20sp"
-            android:textColor="@color/text"/>
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selecione a data do evento:"
+                android:textSize="20sp"
+                android:textColor="@color/text"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp">
+        </LinearLayout>
 
-        <Spinner
-            android:id="@+id/spinnerDaysWeek"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:spinnerMode="dropdown"
-            android:background="@drawable/spinner_border"/>
+            android:paddingTop="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp">
 
-    </LinearLayout>
+            <Spinner
+                android:id="@+id/spinnerDaysWeek"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
+                android:background="@drawable/spinner_border"/>
 
-    <!--  Button to choose the time of the event  -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="5dp">
+        </LinearLayout>
 
-        <TextView
+        <!--  Button to choose the time of the event  -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Selecione o horário do evento:"
-            android:textSize="20sp"
-            android:textColor="@color/text"/>
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selecione o horário do evento:"
+                android:textSize="20sp"
+                android:textColor="@color/text"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/timePickerRtvEvent"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Selecione um horário"
-            android:textColor="#FFFFFF"
-            android:background="@color/secondColor"/>
+            android:paddingTop="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/timePickerRtvEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selecione um horário"
+                android:textColor="#FFFFFF"
+                android:background="@color/secondColor"/>
+
+        </LinearLayout>
 
 
-    <!--  Send the data from the event to be stored  -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:paddingTop="70dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
-        <Button
-            android:id="@+id/sendButtonRtvEvent"
+        <!--  Send the data from the event to be stored  -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enviar"
-            android:textColor="#FFFFFF"
-            android:background="@color/thirdColor"/>
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="70dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
 
+            <Button
+                android:id="@+id/sendButtonRtvEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enviar"
+                android:textColor="#FFFFFF"
+                android:background="@color/thirdColor"/>
+
+        </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

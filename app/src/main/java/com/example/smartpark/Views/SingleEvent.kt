@@ -1,16 +1,15 @@
 package com.example.smartpark.Views
 
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.view.MotionEvent
-import android.view.View
+import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.smartpark.Data.Institutes
 import com.example.smartpark.R
@@ -18,7 +17,6 @@ import com.example.smartpark.Utils.EventsUtil
 import kotlinx.android.synthetic.main.activity_single_event.*
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 class SingleEvent : AppCompatActivity(), View.OnClickListener, DatePickerDialog.OnDateSetListener,
     TimePickerDialog.OnTimeSetListener {
@@ -148,7 +146,7 @@ class SingleEvent : AppCompatActivity(), View.OnClickListener, DatePickerDialog.
     private fun openTimePickerDialog() {
         val calendar = Calendar.getInstance()
         val hourOfDay = calendar.get(Calendar.HOUR_OF_DAY)
-        val minute = calendar.get(Calendar.MINUTE) + 1
+        val minute = calendar.get(Calendar.MINUTE)
 
         TimePickerDialog(this, this, hourOfDay, minute, true).show()
     }
@@ -162,5 +160,32 @@ class SingleEvent : AppCompatActivity(), View.OnClickListener, DatePickerDialog.
         calendar.set(year, month, day, hourOfDay, minute)
         time = simpleHourFormat.format(calendar.time)
         timePickerSngEvent.text = time
+    }
+
+    // Show info button on top bar
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.info_menu, menu)
+        return true
+    }
+
+    // Deal with the click on the info button
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+
+        if (id == R.id.info_menu) {
+            // Inflate the dialog with the layout created for the dialog box
+            val dialogView = LayoutInflater
+                .from(this)
+                .inflate(R.layout.info_single_event, null)
+
+            // Build the alert dialog
+            val alertDialogBuilder = AlertDialog.Builder(this)
+                .setView(dialogView)
+
+            //Show the dialog
+            alertDialogBuilder.show()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

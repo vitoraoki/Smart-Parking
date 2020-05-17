@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.smartpark.Data.Institutes
 import com.example.smartpark.Models.Institute
@@ -122,18 +120,22 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(targetPos, 15F))
     }
 
+    // Show info button on top bar
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
-        inflater.inflate(R.menu.maps_menu, menu)
+        inflater.inflate(R.menu.info_menu, menu)
         return true
     }
 
+    // Deal with the click on the info button
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
 
-        if (id == R.id.info_maps) {
+        if (id == R.id.info_menu) {
             // Inflate the dialog with the layout created for the dialog box
-            val dialogView = LayoutInflater.from(this).inflate(R.layout.info_maps_dialog, null)
+            val dialogView = LayoutInflater
+                .from(this)
+                .inflate(R.layout.info_maps_dialog, null)
 
             dialogView.targetInstName.text = "Destino"
             dialogView.nearInstName.text = "Instituto Próximo"

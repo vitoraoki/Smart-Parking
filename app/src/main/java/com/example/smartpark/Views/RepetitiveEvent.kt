@@ -4,15 +4,20 @@ import android.app.TimePickerDialog
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.TimePicker
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.example.smartpark.Data.Institutes
 import com.example.smartpark.R
 import com.example.smartpark.Utils.EventsUtil
 import kotlinx.android.synthetic.main.activity_repetitive_event.*
+import kotlinx.android.synthetic.main.info_maps_dialog.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -129,7 +134,7 @@ class RepetitiveEvent : AppCompatActivity(), View.OnClickListener,
     private fun openTimePickerDialog() {
         val calendar = Calendar.getInstance()
         val hourOfDay = calendar.get(Calendar.HOUR_OF_DAY)
-        val minute = calendar.get(Calendar.MINUTE) + 1
+        val minute = calendar.get(Calendar.MINUTE)
 
         TimePickerDialog(this, this, hourOfDay, minute, true).show()
     }
@@ -143,5 +148,32 @@ class RepetitiveEvent : AppCompatActivity(), View.OnClickListener,
         calendar.set(year, month, day, hourOfDay, minute)
         time = simpleHourFormat.format(calendar.time)
         timePickerRtvEvent.text = time
+    }
+
+    // Show info button on top bar
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.info_menu, menu)
+        return true
+    }
+
+    // Deal with the click on the info button
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+
+        if (id == R.id.info_menu) {
+            // Inflate the dialog with the layout created for the dialog box
+            val dialogView = LayoutInflater
+                .from(this)
+                .inflate(R.layout.info_repetitive_event, null)
+
+            // Build the alert dialog
+            val alertDialogBuilder = AlertDialog.Builder(this)
+                .setView(dialogView)
+
+            //Show the dialog
+            alertDialogBuilder.show()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

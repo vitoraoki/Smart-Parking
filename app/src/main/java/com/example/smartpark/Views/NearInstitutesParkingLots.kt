@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -19,6 +21,7 @@ import com.example.smartpark.Utils.EventsUtil
 import kotlinx.android.synthetic.main.activity_near_institutes_parking_lots.*
 import kotlinx.android.synthetic.main.delete_event_dialog.*
 import kotlinx.android.synthetic.main.delete_event_dialog.view.*
+import kotlinx.android.synthetic.main.info_maps_dialog.view.*
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
@@ -188,5 +191,32 @@ class NearInstitutesParkingLots : AppCompatActivity(), View.OnClickListener {
         timer.schedule(10000) {
             getDataFromKonker()
         }
+    }
+
+    // Show info button on top bar
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.info_menu, menu)
+        return true
+    }
+
+    // Deal with the click on the info button
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+
+        if (id == R.id.info_menu) {
+            // Inflate the dialog with the layout created for the dialog box
+            val dialogView = LayoutInflater
+                .from(this)
+                .inflate(R.layout.info_near_institutes_pl, null)
+
+            // Build the alert dialog
+            val alertDialogBuilder = AlertDialog.Builder(this)
+                .setView(dialogView)
+
+            //Show the dialog
+            alertDialogBuilder.show()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

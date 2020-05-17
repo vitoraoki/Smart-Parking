@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/sngEventLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Views.SingleEvent"
@@ -11,171 +10,178 @@
     android:clickable="true"
     android:focusableInTouchMode="true">
 
-    <!-- Write a title for the event   -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="5dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
+        <!-- Write a title for the event   -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Digite um título para o evento:"
-            android:textSize="20sp"
-            android:textColor="@color/text"/>
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Digite um título para o evento:"
+                android:textSize="20sp"
+                android:textColor="@color/text"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/sngEventTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_border"
+                android:hint="Ex: Aula de cálculo 1"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:inputType="textCapSentences"
+                android:maxLength="256"/>
+
+        </LinearLayout>
+
+        <!-- Spinner to choose the event local   -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selecione o instituto de destino:"
+                android:textSize="20sp"
+                android:textColor="@color/text"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spinnerInstSingleEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
+                android:background="@drawable/spinner_border"/>
+
+        </LinearLayout>
+
+        <!--  Button to choose the date of the event  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selecione a data do evento:"
+                android:textSize="20sp"
+                android:textColor="@color/text"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp">
+
+            <Button
+                android:id="@+id/datePickerSngEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selecione uma data"
+                android:textColor="#FFFFFF"
+                android:background="@color/secondColor"/>
+
+        </LinearLayout>
+
+        <!--  Button to choose the time of the event  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selecione o horário do evento:"
+                android:textSize="20sp"
+                android:textColor="@color/text"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <Button
+                android:id="@+id/timePickerSngEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selecione um horário"
+                android:textColor="#FFFFFF"
+                android:background="@color/secondColor"/>
+
+        </LinearLayout>
+
+
+        <!--  Send the data from the event to be stored  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="70dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <Button
+                android:id="@+id/sendButtonSngEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enviar"
+                android:textColor="#FFFFFF"
+                android:background="@color/thirdColor"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/sngEventTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_border"
-            android:hint="Ex: Aula de cálculo 1"
-            android:textCursorDrawable="@drawable/cursor_color"
-            android:inputType="textCapSentences"
-            android:maxLength="256"/>
-
-    </LinearLayout>
-
-    <!-- Spinner to choose the event local   -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="5dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Selecione o instituto de destino:"
-            android:textSize="20sp"
-            android:textColor="@color/text"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:orientation="horizontal">
-
-        <Spinner
-            android:id="@+id/spinnerInstSingleEvent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:spinnerMode="dropdown"
-            android:background="@drawable/spinner_border"/>
-
-    </LinearLayout>
-
-    <!--  Button to choose the date of the event  -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="5dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Selecione a data do evento:"
-            android:textSize="20sp"
-            android:textColor="@color/text"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp">
-
-        <Button
-            android:id="@+id/datePickerSngEvent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Selecione uma data"
-            android:textColor="#FFFFFF"
-            android:background="@color/secondColor"/>
-
-    </LinearLayout>
-
-    <!--  Button to choose the time of the event  -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="5dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Selecione o horário do evento:"
-            android:textSize="20sp"
-            android:textColor="@color/text"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
-        <Button
-            android:id="@+id/timePickerSngEvent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Selecione um horário"
-            android:textColor="#FFFFFF"
-            android:background="@color/secondColor"/>
-
-    </LinearLayout>
-
-
-    <!--  Send the data from the event to be stored  -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:paddingTop="70dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
-        <Button
-            android:id="@+id/sendButtonSngEvent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Enviar"
-            android:textColor="#FFFFFF"
-            android:background="@color/thirdColor"/>
-
-    </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

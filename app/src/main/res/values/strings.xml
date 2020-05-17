@@ -16,9 +16,10 @@
 
     <!--Text in the main page-->
     <string name="main_text">
-        Bem vindo(a) ao app Smart Campus. Escolha abaixo uma das opções de criação de evento.
-        Caso haja alguma dúvida em relação a criação de cada evento, consulte o menu de ajuda
-        localizado no canto superior direito de cada página.
+        Bem vindo(a) ao app Smart Campus. Escolha abaixo uma das opções de criação de evento,
+        consulta da lista de eventos já criados ou a consulta de informações de um determinado
+        instituto. Caso haja alguma dúvida em relação a criação de cada evento, consulte o menu de
+        ajuda localizado no canto superior direito de cada página.
     </string>
 
     <!--Text to change type of list of events-->
@@ -48,4 +49,86 @@
 
     <!-- Error request -->
     <string name="error_request">Erro ao carregar os dados. Por favor, recarregue a página</string>
+
+    <!-- Single event creation -->
+    <string name="sng_event_creation">Criação de um evento único:</string>
+
+    <!-- Repetitive event creation -->
+    <string name="rtv_event_creation">Criação de um evento repetitivo:</string>
+
+    <!-- Single event explanation -->
+    <string name="sng_event_expl">Um evento único* é definido como um evento exporádico no seu
+        dia-a-dia. Ele pode ser, por exemplo: uma reunião, um trabalho em grupo, uma monitoria,
+        etc.</string>
+
+    <!-- Repetitive event explanation -->
+    <string name="rtv_event_expl">Um evento repetitivo é definido como um evento que ocorre de
+        forma recorrente no seu dia-a-dia. Ele pode ser, por exemplo: uma aula que ocorre em dias
+        definidos da semana, uma reunião semanal, alguma atividade de extensão, etc.</string>
+
+    <!-- Event title -->
+    <string name="event_title"><b>1. Crie um título para seu evento:</b> por exemplo,
+        Aula de cálculo 1, Reunião com minha orientadora, etc.</string>
+
+    <!-- Event location -->
+    <string name="event_location"><b>2. Selecione na caixa o instituto onde ocorrerá seu evento:</b>
+        por exemplo, sua aula de mc102 ocorrerá no IC, selecione a opção IC - Instituto de
+        Computação.</string>
+
+    <!-- Single event date -->
+    <string name="sng_event_date"><b>3. Selecione no calendário a data que seu evento ocorrerá:</b>
+        por exemplo, sua reunião com o(a) orientador(a) ocorrerá dia 10/03/2020. Ao clicar no botão
+        \"Selecione uma data\", um calendário abrirá e você poderá selecionar uma data.</string>
+
+    <!-- Repetitive event date -->
+    <string name="rtv_event_date"><b>3. Selecione na caixa o dia da semana que seu evento ocorrerá:</b>
+        por exemplo, sua aula de cáculo 1 ocorre toda segunda-feria.</string>
+
+    <!-- Event time -->
+    <string name="event_time"><b>4. Selecione no relógio o horário que seu evento ocorrerá:</b>
+        por exemplo, sua aula será as 10h da manhã. Ao clicar no botão \"Selecione um horário\", um
+        relógio abrirá e você poderá selecionar o horário que desejar.</string>
+
+    <!-- Single event note -->
+    <string name="sng_event_note">*Obs.: Os eventos únicos, ao serem acessados, são deletados do
+        banco de dados. Assim, ao tentar acessá-los na lista de eventos únicos, você deverá confirmar
+        sua ação.</string>
+
+    <!-- Consult institute information -->
+    <string name="consult_institute_info">Consulte os dados de um instituto:</string>
+
+    <!-- Consult institute information explanation -->
+    <string name="consult_institute_expl">Ao selecionar o instituto desejado abaixo, você terá
+    informações de endereço do instituto, como Rua, Número e CEP, além da quantidade de vagas
+    disponíveis no momento da consulta e também um mapa que mostrará a localização do instituto
+    e os institutos próximos (num raio de 300m).</string>
+
+    <!-- Near institutes parking lots information -->
+    <string name="near_institutes_pl">Quantidade de vagas nos estacionamentos próximos:</string>
+
+    <!-- Near institutes parking lots explanation -->
+    <string name="near_institutes_pl_expl">Na lista abaixo, serão mostradas a quantidade de vagas
+        do estacionamento do instituto de destino (primeiro da lista) e dos estacionamentos dos
+        institutos próximos (dentro de um raio de 300m e ordenados pelo mais próximo). Ao clicar
+        na informação de cada instituto, será mostrado um mapa com as localizações do instituto de
+        destino e do instituto próximo clicado. A quantidade de vagas de cada estacionamento é
+        atualizada automaticamente a cada 30 segundos, podendo ser atualizada manualmente, clicando
+        no botão no canto inferior direito, quando desejado, ou se um erro de obtenção de dados
+        ocorrer.</string>
+
+    <!-- Maint activity information -->
+    <string name="main_activity">Smart Park:</string>
+
+    <!-- Main activity explanation -->
+    <string name="main_activity_expl">O app Smart Park foi desenvolvido pelo aluno Vitor Aoki
+        (orientado pela professora Juliana Borin e com a contribuição de Luis Gonzalez da Konker
+        Labs) e faz parte do projeto Smart Campus Unicamp. O app tem como objetivo ajudar as
+        pessoas que frequentam a Unicamp a encontrar vagas de estacionamento próximas a locais que
+        pretendem ir. Para isso o app utiliza a informação de quantidade de vagas existentes nos
+        estacionamentos de cada instituto, obtidas como parte do projeto Smart Campus Unicamp. No
+        app é utilizada a criação de \"eventos\", que representam compromissos que as pessoas têm na
+        universidade, utilizando os dados desses eventos para mostrar a quantidade de vagas, em tempo
+        real, do estacionamento do instituto que a pessoa pretende ir e dos estacionamentos próximos
+        (num raio de 300m). O app foi pensado de forma em que o(a) motorista tenha o acesso a essa
+        informação, sem se distrair ao volante.</string>
 </resources>

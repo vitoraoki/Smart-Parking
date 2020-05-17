@@ -1,98 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".Views.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/smart_campus"
-            android:padding="30dp"/>
+            android:orientation="vertical"
+            android:gravity="center">
 
-        <TextView
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/smart_campus"
+                android:padding="30dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/main_text"
+                android:textSize="15sp"
+                android:padding="10dp"
+                android:textColor="@color/text"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:gravity="center"
-            android:text="@string/main_text"
-            android:textSize="15sp"
-            android:padding="10dp"
-            android:textColor="@color/text"
-            />
+            android:padding="20dp">
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="20dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:gravity="center">
-            <Button
-                android:id="@+id/singleEvent"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Criar evento único"
-                android:background="@color/secondColor"
-                android:textColor="#FFFFFF"/>
-        </LinearLayout>
+                android:padding="10dp"
+                android:gravity="center">
+                <Button
+                    android:id="@+id/singleEvent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Criar evento único"
+                    android:background="@color/secondColor"
+                    android:textColor="#FFFFFF"/>
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:gravity="center">
-            <Button
-                android:id="@+id/repetitiveEvents"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Criar evento repetitivo"
-                android:background="@color/secondColor"
-                android:textColor="#FFFFFF"/>
-        </LinearLayout>
+                android:padding="10dp"
+                android:gravity="center">
+                <Button
+                    android:id="@+id/repetitiveEvents"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Criar evento repetitivo"
+                    android:background="@color/secondColor"
+                    android:textColor="#FFFFFF"/>
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:gravity="center">
-            <Button
-                android:id="@+id/listEvents"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lista de eventos"
-                android:background="@color/secondColor"
-                android:textColor="#FFFFFF"/>
-        </LinearLayout>
+                android:padding="10dp"
+                android:gravity="center">
+                <Button
+                    android:id="@+id/listEvents"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lista de eventos"
+                    android:background="@color/secondColor"
+                    android:textColor="#FFFFFF"/>
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:gravity="center">
-            <Button
-                android:id="@+id/instituteConsult"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Consultar Instituto"
-                android:background="@color/secondColor"
-                android:textColor="#FFFFFF"/>
+                android:padding="10dp"
+                android:gravity="center">
+                <Button
+                    android:id="@+id/instituteConsult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Consultar Instituto"
+                    android:background="@color/secondColor"
+                    android:textColor="#FFFFFF"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>
