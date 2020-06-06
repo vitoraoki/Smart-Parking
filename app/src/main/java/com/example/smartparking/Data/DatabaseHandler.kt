@@ -1,10 +1,10 @@
-package com.example.smartpark.Data
+package com.example.smartparking.Data
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.example.smartpark.Models.Event
+import com.example.smartparking.Models.Event
 
 val DATABASE_NAME = "SmartPark"
 val TABLE_NAME = "Events"

@@ -1,4 +1,4 @@
-package com.example.smartpark.Authorization
+package com.example.smartparking.Authorization
 import okhttp3.Authenticator
 import okhttp3.Response
 import okhttp3.*

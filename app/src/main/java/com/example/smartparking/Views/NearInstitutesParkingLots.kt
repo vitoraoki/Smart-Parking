@@ -1,27 +1,21 @@
-package com.example.smartpark.Views
+package com.example.smartparking.Views
 
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.smartpark.Authorization.AccessTokenAuthenticator
-import com.example.smartpark.Authorization.AuthorizationInterceptor
-import com.example.smartpark.Authorization.AuthorizationRepository
-import com.example.smartpark.R
-import com.example.smartpark.Utils.DistanceUtil
-import com.example.smartpark.Adapters.NearInstitutesListAdapter
-import com.example.smartpark.Utils.EventsUtil
+import com.example.smartparking.Authorization.AccessTokenAuthenticator
+import com.example.smartparking.Authorization.AuthorizationInterceptor
+import com.example.smartparking.Authorization.AuthorizationRepository
+import com.example.smartparking.R
+import com.example.smartparking.Utils.DistanceUtil
+import com.example.smartparking.Adapters.NearInstitutesListAdapter
 import kotlinx.android.synthetic.main.activity_near_institutes_parking_lots.*
-import kotlinx.android.synthetic.main.delete_event_dialog.*
-import kotlinx.android.synthetic.main.delete_event_dialog.view.*
-import kotlinx.android.synthetic.main.info_maps_dialog.view.*
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
@@ -90,10 +84,11 @@ class NearInstitutesParkingLots : AppCompatActivity(), View.OnClickListener {
         // Initialize the authenticator repository
         val authorizationRepository = AuthorizationRepository(this)
 
-        val guid = "2d948131-137e-47ed-8699-0d2a6b387a7f"
-        val application = "yv0ntjaj"
-        val channel = "parkinglots"
-        val url = "https://api.demo.konkerlabs.net/v1/$application/incomingEvents?q=device:$guid channel:$channel &sort=newest&limit=1"
+//        val guid = "2d948131-137e-47ed-8699-0d2a6b387a7f"
+//        val application = "yv0ntjaj"
+//        val channel = "parkinglots"
+//        val url = "https://api.demo.konkerlabs.net/v1/$application/incomingEvents?q=device:$guid channel:$channel &sort=newest&limit=1"
+        val url = "https://api.prod.konkerlabs.net:443/v1/default/incomingEvents?sort=newest&limit=21"
 
         val request = Request.Builder()
             .url(url)
@@ -122,13 +117,20 @@ class NearInstitutesParkingLots : AppCompatActivity(), View.OnClickListener {
                 var responseStr = response.body!!.string()
 
                 // Transform the response in a json
-                val jsonResponse = JSONObject(responseStr)
+                val jsonArrayResponse = JSONObject(responseStr)
                     .getJSONArray("result")
-                    .getJSONObject(0)
-                    .getJSONObject("payload")
+
+                // Get a hash with the guid of the institute parking lot device and its number of parking lots
+                var parkingLots = JSONObject()
+                for (i in 0 until jsonArrayResponse.length()) {
+                    parkingLots.put(
+                        jsonArrayResponse.getJSONObject(i).getJSONObject("incoming").getString("deviceGuid"),
+                        jsonArrayResponse.getJSONObject(i).getJSONObject("payload").getString("parking_lots")
+                    )
+                }
 
                 // Call the function that handle with the success request
-                showNearInstitutes(jsonResponse)
+                showNearInstitutes(parkingLots)
                 client.dispatcher.executorService.shutdown()
             }
         })

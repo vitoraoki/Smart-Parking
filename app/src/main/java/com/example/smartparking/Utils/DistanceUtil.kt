@@ -1,7 +1,7 @@
-package com.example.smartpark.Utils
+package com.example.smartparking.Utils
 
-import com.example.smartpark.Data.Institutes
-import com.example.smartpark.Models.Institute
+import com.example.smartparking.Data.Institutes
+import com.example.smartparking.Models.Institute
 
 class DistanceUtil {
     companion object {
@@ -26,7 +26,7 @@ class DistanceUtil {
             var listNearInstitutes: MutableList<Institute> = mutableListOf()
             val minimumDistance = 300.0
 
-            for (i in 0..listInstitutes.size - 1) {
+            for (i in 0 until listInstitutes.size) {
                 var distance = haversine(
                     listInstitutes.get(target).getLatitude(),
                     listInstitutes.get(target).getLongitude(),

@@ -1,4 +1,4 @@
-package com.example.smartpark.Views
+package com.example.smartparking.Views
 
 import android.content.Intent
 import android.graphics.Color
@@ -11,12 +11,12 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
-import com.example.smartpark.Data.DatabaseHandler
-import com.example.smartpark.Adapters.EventListAdapter
-import com.example.smartpark.Models.Event
-import com.example.smartpark.R
-import com.example.smartpark.R.*
-import com.example.smartpark.Utils.EventsUtil
+import com.example.smartparking.Data.DatabaseHandler
+import com.example.smartparking.Adapters.EventListAdapter
+import com.example.smartparking.Models.Event
+import com.example.smartparking.R
+import com.example.smartparking.R.*
+import com.example.smartparking.Utils.EventsUtil
 import kotlinx.android.synthetic.main.access_event_dialog.*
 import kotlinx.android.synthetic.main.activity_list_events.*
 import kotlinx.android.synthetic.main.delete_event_dialog.*

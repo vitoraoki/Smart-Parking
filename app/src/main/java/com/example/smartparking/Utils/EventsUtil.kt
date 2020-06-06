@@ -1,8 +1,8 @@
-package com.example.smartpark.Utils
+package com.example.smartparking.Utils
 
 import android.content.Context
-import com.example.smartpark.Data.DatabaseHandler
-import com.example.smartpark.Models.Event
+import com.example.smartparking.Data.DatabaseHandler
+import com.example.smartparking.Models.Event
 
 class EventsUtil {
 

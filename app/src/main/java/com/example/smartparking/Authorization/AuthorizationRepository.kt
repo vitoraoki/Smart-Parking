@@ -1,4 +1,4 @@
-package com.example.smartpark.Authorization
+package com.example.smartparking.Authorization
 
 import android.content.Context
 import android.content.SharedPreferences

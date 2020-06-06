@@ -1,4 +1,4 @@
-package com.example.smartpark.Views
+package com.example.smartparking.Views
 
 import android.content.Intent
 import android.content.SharedPreferences
@@ -8,18 +8,14 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.smartpark.Authorization.AccessTokenAuthenticator
-import com.example.smartpark.Authorization.AuthorizationInterceptor
-import com.example.smartpark.Authorization.AuthorizationRepository
-import com.example.smartpark.Data.Institutes
-import com.example.smartpark.R
-import com.google.android.gms.common.server.response.FastJsonResponse
+import com.example.smartparking.Authorization.AccessTokenAuthenticator
+import com.example.smartparking.Authorization.AuthorizationInterceptor
+import com.example.smartparking.Authorization.AuthorizationRepository
+import com.example.smartparking.Data.Institutes
+import com.example.smartparking.R
 import kotlinx.android.synthetic.main.activity_consult_institute.*
-import kotlinx.android.synthetic.main.info_maps_dialog.view.*
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
@@ -89,10 +85,11 @@ class ConsultInstitute : AppCompatActivity(), View.OnClickListener {
         // Initialize the authenticator repository
         val authorizationRepository = AuthorizationRepository(this)
 
-        val guid = "2d948131-137e-47ed-8699-0d2a6b387a7f"
-        val application = "yv0ntjaj"
-        val channel = "parkinglots"
-        val url = "https://api.demo.konkerlabs.net/v1/$application/incomingEvents?q=device:$guid channel:$channel &sort=newest&limit=1"
+//        val guid = "2d948131-137e-47ed-8699-0d2a6b387a7f"
+//        val application = "yv0ntjaj"
+//        val channel = "parkinglots"
+//        val url = "https://api.demo.konkerlabs.net/v1/$application/incomingEvents?q=device:$guid channel:$channel &sort=newest&limit=1"
+        val url = "https://api.prod.konkerlabs.net:443/v1/default/incomingEvents?sort=newest&limit=21"
 
         val request = Request.Builder()
             .url(url)
@@ -122,13 +119,20 @@ class ConsultInstitute : AppCompatActivity(), View.OnClickListener {
                 var responseStr = response.body!!.string()
 
                 // Transform the response in a json
-                val jsonResponse = JSONObject(responseStr)
+                val jsonArrayResponse = JSONObject(responseStr)
                     .getJSONArray("result")
-                    .getJSONObject(0)
-                    .getJSONObject("payload")
+
+                // Get a hash with the guid of the institute parking lot device and its number of parking lots
+                var parkingLots = JSONObject()
+                for (i in 0 until jsonArrayResponse.length()) {
+                    parkingLots.put(
+                        jsonArrayResponse.getJSONObject(i).getJSONObject("incoming").getString("deviceGuid"),
+                        jsonArrayResponse.getJSONObject(i).getJSONObject("payload").getString("parking_lots")
+                    )
+                }
 
                 // Call the function that handle with the success request
-                showInstituteData(jsonResponse)
+                showInstituteData(parkingLots)
                 client.dispatcher.executorService.shutdown()
             }
         })
@@ -149,7 +153,7 @@ class ConsultInstitute : AppCompatActivity(), View.OnClickListener {
         instituteStreet.text = institute.getStreet()
         instituteNumber.text = institute.getNumber()
         institutePostCode.text = institute.getPostCode()
-        instNumPL.text = jsonResponse.get(instituteId).toString()
+        instNumPL.text = jsonResponse.get(institute.getGuid()).toString()
 
         // Change the visibility of the layouts to show the data and make the button to see the map
         // clickable

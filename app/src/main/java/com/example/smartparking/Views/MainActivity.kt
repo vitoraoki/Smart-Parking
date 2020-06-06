@@ -1,11 +1,10 @@
-package com.example.smartpark.Views
+package com.example.smartparking.Views
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import com.example.smartpark.R
+import com.example.smartparking.R
 import kotlinx.android.synthetic.main.activity_main.*
 import android.content.SharedPreferences
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.example.smartpark.Views
+package com.example.smartparking.Views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
-import com.example.smartpark.Data.Institutes
-import com.example.smartpark.Models.Institute
-import com.example.smartpark.R
-import com.example.smartpark.Utils.DistanceUtil
+import com.example.smartparking.Data.Institutes
+import com.example.smartparking.Models.Institute
+import com.example.smartparking.R
+import com.example.smartparking.Utils.DistanceUtil
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap

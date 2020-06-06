@@ -1,4 +1,4 @@
-package com.example.smartpark.Views
+package com.example.smartparking.Views
 
 import android.app.TimePickerDialog
 import android.content.Context
@@ -13,11 +13,10 @@ import android.widget.ArrayAdapter
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.smartpark.Data.Institutes
-import com.example.smartpark.R
-import com.example.smartpark.Utils.EventsUtil
+import com.example.smartparking.Data.Institutes
+import com.example.smartparking.R
+import com.example.smartparking.Utils.EventsUtil
 import kotlinx.android.synthetic.main.activity_repetitive_event.*
-import kotlinx.android.synthetic.main.info_maps_dialog.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 

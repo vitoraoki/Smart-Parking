@@ -1,4 +1,4 @@
-package com.example.smartpark.Views
+package com.example.smartparking.Views
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -11,9 +11,9 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.smartpark.Data.Institutes
-import com.example.smartpark.R
-import com.example.smartpark.Utils.EventsUtil
+import com.example.smartparking.Data.Institutes
+import com.example.smartparking.R
+import com.example.smartparking.Utils.EventsUtil
 import kotlinx.android.synthetic.main.activity_single_event.*
 import java.text.SimpleDateFormat
 import java.util.*

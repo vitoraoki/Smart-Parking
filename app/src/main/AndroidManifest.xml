@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.smartpark">
+    package="com.example.smartparking">
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -30,7 +30,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Views.MainActivity"
+            android:name="com.example.smartparking.Views.MainActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,24 +39,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Views.SingleEvent"
-            android:parentActivityName=".Views.MainActivity" />
+            android:name="com.example.smartparking.Views.SingleEvent"
+            android:parentActivityName="com.example.smartparking.Views.MainActivity" />
         <activity
-            android:name=".Views.RepetitiveEvent"
-            android:parentActivityName=".Views.MainActivity" />
+            android:name="com.example.smartparking.Views.RepetitiveEvent"
+            android:parentActivityName="com.example.smartparking.Views.MainActivity" />
         <activity
-            android:name=".Views.ListEvents"
+            android:name="com.example.smartparking.Views.ListEvents"
             android:launchMode="singleTop"
-            android:parentActivityName=".Views.MainActivity" />
+            android:parentActivityName="com.example.smartparking.Views.MainActivity" />
         <activity
-            android:name=".Views.ConsultInstitute"
+            android:name="com.example.smartparking.Views.ConsultInstitute"
             android:launchMode="singleTop"
-            android:parentActivityName=".Views.MainActivity"/>
+            android:parentActivityName="com.example.smartparking.Views.MainActivity"/>
         <activity
-            android:name=".Views.NearInstitutesParkingLots"
+            android:name="com.example.smartparking.Views.NearInstitutesParkingLots"
             android:launchMode="singleTop"
-            android:parentActivityName=".Views.ListEvents" />
-        <activity android:name=".Views.MapsActivity" />
+            android:parentActivityName="com.example.smartparking.Views.ListEvents" />
+        <activity android:name="com.example.smartparking.Views.MapsActivity" />
     </application>
 
 </manifest>

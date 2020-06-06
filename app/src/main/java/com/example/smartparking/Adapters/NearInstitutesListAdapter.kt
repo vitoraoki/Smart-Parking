@@ -1,7 +1,6 @@
-package com.example.smartpark.Adapters
+package com.example.smartparking.Adapters
 
 import android.content.Context
-import android.graphics.Color
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.example.smartpark.Models.Institute
-import com.example.smartpark.R
+import com.example.smartparking.Models.Institute
+import com.example.smartparking.R
 import org.json.JSONObject
 
 class NearInstitutesListAdapter (
@@ -31,12 +30,12 @@ class NearInstitutesListAdapter (
 
         // Verify if it is just one parking lot
         if (institutesParkingLots.getString(
-                institute.getInstituteId()) == "1") {
+                institute.getGuid()) == "1") {
             nearInstituteParkingLotsView.text = institutesParkingLots.getString(
-                institute.getInstituteId()) + " vaga"
+                institute.getGuid()) + " vaga"
         } else {
             nearInstituteParkingLotsView.text = institutesParkingLots.getString(
-                institute.getInstituteId()) + " vagas"
+                institute.getGuid()) + " vagas"
         }
 
         // If the institute is the target institute, change the layout of its row
@@ -46,7 +45,7 @@ class NearInstitutesListAdapter (
         }
 
         // Put green when the institute parking lot has at least one parking lot
-        if (institutesParkingLots.get(institute.getInstituteId()).toString().toInt() > 0) {
+        if (institutesParkingLots.get(institute.getGuid()).toString().toInt() > 0) {
             nearInstituteParkingLotsView.setTextColor(ContextCompat.getColor(mContext, R.color.positive))
         } else {
             nearInstituteParkingLotsView.setTextColor(ContextCompat.getColor(mContext, R.color.negative))

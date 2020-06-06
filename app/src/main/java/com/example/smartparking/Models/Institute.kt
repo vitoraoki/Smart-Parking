@@ -1,4 +1,4 @@
-package com.example.smartpark.Models
+package com.example.smartparking.Models
 
 class Institute {
 
@@ -9,11 +9,12 @@ class Institute {
     private var street = ""
     private var number = ""
     private var postCode = ""
+    private var guid = ""
     private var distance = 0.0 // Distance calculated to a target institute
 
     constructor()
     constructor(instituteId: String, instituteName: String, latitude: Double, longitude: Double,
-                street: String, number: String, postCode: String) {
+                street: String, number: String, postCode: String, guid: String) {
         this.instituteId = instituteId
         this.instituteName = instituteName
         this.latitude = latitude
@@ -21,6 +22,7 @@ class Institute {
         this.street = street
         this.number = number
         this.postCode = postCode
+        this.guid = guid
     }
 
     fun getInstituteId(): String {
@@ -77,6 +79,14 @@ class Institute {
 
     fun setLongitude(longitude: Double) {
         this.longitude = longitude
+    }
+
+    fun getGuid(): String {
+        return this.guid
+    }
+
+    fun setGuid(guid: String) {
+        this.guid = guid
     }
 
     fun getDistance(): Double {

@@ -1,13 +1,13 @@
-package com.example.smartpark.Adapters
+package com.example.smartparking.Adapters
 
-import com.example.smartpark.Models.Event
+import com.example.smartparking.Models.Event
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import com.example.smartpark.R
+import com.example.smartparking.R
 
 class EventListAdapter (
     var mContext: Context,

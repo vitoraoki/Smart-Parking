@@ -1,4 +1,4 @@
-package com.example.smartpark.Models
+package com.example.smartparking.Models
 
 class Event {
 
