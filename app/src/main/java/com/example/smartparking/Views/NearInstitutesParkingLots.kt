@@ -35,6 +35,7 @@ class NearInstitutesParkingLots : AppCompatActivity(), View.OnClickListener {
 
         // Show the back button in toolbar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setTitle("Estacionamentos Próximos")
     }
 
     override fun onStart() {

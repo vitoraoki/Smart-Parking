@@ -23,5 +23,7 @@ class ListEvents : AppCompatActivity() {
 
         // Show the back button in toolbar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.elevation = 0F
+        supportActionBar?.title = "Lista de Eventos"
     }
 }

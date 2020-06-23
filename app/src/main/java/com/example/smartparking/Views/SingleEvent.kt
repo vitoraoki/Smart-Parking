@@ -39,6 +39,7 @@ class SingleEvent : AppCompatActivity(), View.OnClickListener, DatePickerDialog.
 
         // Show the back button in toolbar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setTitle("Evento Único")
     }
 
     // Function to hide keyboard

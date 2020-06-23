@@ -39,6 +39,7 @@ class RepetitiveEvent : AppCompatActivity(), View.OnClickListener,
 
         // Show the back button in toolbar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setTitle("Evento Repetitivo")
     }
 
     // Function to hide keyboard

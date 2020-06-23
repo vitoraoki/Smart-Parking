@@ -34,6 +34,7 @@ class ConsultInstitute : AppCompatActivity(), View.OnClickListener {
 
         // Show the back button in toolbar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setTitle("Consultar Instituto")
     }
 
     // Load all values to put in the Spinner that show all institutes
